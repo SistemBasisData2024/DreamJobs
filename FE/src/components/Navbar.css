@@ -1,38 +1,44 @@
-/* navbar.css */
+/* Navbar.css */
 
 .navbar {
     display: flex;
-    align-items: center;
     justify-content: space-between;
-    padding: 1rem;
-    background-color: #0a0a00;
-    color: #fff;
+    align-items: center;
+    padding: 1rem 2rem;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.navbar-title {
-    margin: 0;
+.navbar-logo {
+    height: 60px;
+    margin-right: 2rem;
 }
 
 .navbar-menu {
-    list-style-type: none;
+    list-style: none;
+    display: flex;
     margin: 0;
     padding: 0;
-    display: flex;
 }
 
 .navbar-menu-item {
-    margin-left: 15px;
-}
-
-.navbar-menu-item:first-child {
-    margin-left: 0;
+    margin-left: 2rem;
 }
 
 .navbar-link {
+    color: #333;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.signup-button {
+    background-color: #3b4f64;
     color: #fff;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
     text-decoration: none;
 }
 
-.navbar-link:hover {
-    text-decoration: underline;
+.signup-button:hover {
+    background-color: #293038;
 }

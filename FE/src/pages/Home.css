@@ -1,0 +1,39 @@
+.home {
+    text-align: center;
+    padding: 2rem;
+    position: relative;
+    /* Tambahkan ini untuk memungkinkan positioning absolut */
+}
+
+h1 {
+    font-weight: bold;
+    color: yellowgreen;
+    font-style: italic;
+    /* Membuat teks menjadi bold */
+}
+
+.search-container {
+    display: flex;
+    position: absolute;
+    left: 1rem;
+    /* Jarak dari bagian kiri halaman */
+}
+
+.search-input {
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 5px 0 0 5px;
+    border-right: none;
+}
+
+.search-button {
+    background-color: #3b4f64;
+    color: #fff;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.search-button:hover {
+    background-color: #0056b3;
+}

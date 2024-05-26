@@ -9,7 +9,7 @@ body, html, #root {
   min-height: 100%;
   display: flex;
   flex-direction: column;
-  background: linear-gradient(to right, #6a11cb, #2575fc);
+  background: linear-gradient(to right, #130f17, #39475f);
   background-size: cover;
 }
 
