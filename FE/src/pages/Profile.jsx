@@ -1,28 +1,31 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
 const Profile = () => {
-    const [user, setUser] = useState({});
+    const [profile, setProfile] = useState(null);
 
     useEffect(() => {
         const fetchProfile = async () => {
             const token = localStorage.getItem('token');
-            const res = await axios.get('/api/users/profile', {
+            const res = await axios.get('/api/profile', {
                 headers: {
-                    'x-auth-token': token,
-                },
+                    Authorization: `Bearer ${token}`
+                }
             });
-            setUser(res.data);
+            setProfile(res.data);
         };
-
         fetchProfile();
     }, []);
 
+    if (!profile) return <div>Loading...</div>;
+
     return (
         <div>
-            <h1>Profile</h1>
-            <p>Name: {user.username}</p>
-            <p>Email: {user.email}</p>
+            <h1>{profile.user_name}'s Profile</h1>
+            <p>Email: {profile.email}</p>
+            <p>Username: {profile.username}</p>
+            <p>Interest: {profile.interest}</p>
+            <p>Role: {profile.role}</p>
         </div>
     );
 };

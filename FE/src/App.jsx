@@ -1,25 +1,32 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import Navbar from './components/Navbar';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Home from './pages/Home';
-import JobDetail from './pages/JobDetail';
-import Login from './pages/Login';
-import SignUp from './pages/SignUp';
 import Profile from './pages/Profile';
+import Job from './pages/Job';
+import Login from './components/Auth/Login';
+import Signup from './components/Auth/Signup';
+import Navbar from './components/Navbar';
+import './App.css';
 
-const App = () => {
-    return (
-        <Router>
-            <Navbar />
-            <Switch>
-                <Route path="/" exact component={Home} />
-                <Route path="/login" component={Login} />
-                <Route path="/signup" component={SignUp} />
-                <Route path="/profile" component={Profile} />
-                <Route path="/jobs/:id" component={JobDetail} />
-            </Switch>
-        </Router>
-    );
-};
+function App() {
+  return (
+    <Router>
+      <div className="app">
+        <header>
+          <Navbar />
+        </header>
+        <main>
+          <Routes>
+            <Route path="/home" element={<Home />} /> 
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/job/:id" element={<Job />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<Signup />} />
+          </Routes>
+        </main>
+      </div>
+    </Router>
+  );// cuma biar homenya ga full white screen aja
+}
 
 export default App;
