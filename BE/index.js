@@ -9,7 +9,7 @@ import userRoutes from "./routes/userRoutes.js"
 //import jobRoutes from "./routes/job.routes.js"; -> buat isi job.routes dulu
 import resumeRoutes from "./routes/resumeRoutes.js";
 //import applicationRoutes from "./routes/application.routes.js";
-//import companyRoutes from "./routes/company.routes.js";
+import companyRoutes from "./routes/companyRoutes.js";
 
 dotenv.config();
 
@@ -41,9 +41,10 @@ app.use(helmet());
 
 app.use("/user", userRoutes);
 app.use("/resume", resumeRoutes);
+app.use("/company", companyRoutes);
 /*app.use("/jobs", jobRoutes);
 app.use("/application", applicationRoutes);
-app.use("/company", companyRoutes);*/
+*/
 
 /* ======================================
  ** ========= Server connection =========
