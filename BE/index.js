@@ -5,7 +5,7 @@ import helmet from "helmet";
 import cors from "cors";
 import db from "./config/db.js";
 
-import userRoutes from "./routes/user.routes.js";
+import userRoutes from "./routes/userRoutes.js"
 //import jobRoutes from "./routes/job.routes.js"; -> buat isi job.routes dulu
 //import resumeRoutes from "./routes/resume.routes.js";
 //import applicationRoutes from "./routes/application.routes.js";
