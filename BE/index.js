@@ -7,7 +7,7 @@ import db from "./config/db.js";
 
 import userRoutes from "./routes/userRoutes.js"
 //import jobRoutes from "./routes/job.routes.js"; -> buat isi job.routes dulu
-//import resumeRoutes from "./routes/resume.routes.js";
+import resumeRoutes from "./routes/resumeRoutes.js";
 //import applicationRoutes from "./routes/application.routes.js";
 //import companyRoutes from "./routes/company.routes.js";
 
@@ -40,8 +40,8 @@ app.use(helmet());
 /* ===================================== */
 
 app.use("/user", userRoutes);
-/*app.use("/jobs", jobRoutes);
 app.use("/resume", resumeRoutes);
+/*app.use("/jobs", jobRoutes);
 app.use("/application", applicationRoutes);
 app.use("/company", companyRoutes);*/
 
