@@ -8,7 +8,7 @@ import db from "./config/db.js";
 import userRoutes from "./routes/userRoutes.js"
 import jobRoutes from "./routes/jobRoutes.js";
 import resumeRoutes from "./routes/resumeRoutes.js";
-//import applicationRoutes from "./routes/application.routes.js";
+import applicationRoutes from "./routes/applicationRoutes.js";
 import companyRoutes from "./routes/companyRoutes.js";
 
 dotenv.config();
@@ -43,9 +43,8 @@ app.use("/user", userRoutes);
 app.use("/resume", resumeRoutes);
 app.use("/company", companyRoutes);
 app.use("/jobs", jobRoutes);
-/*
 app.use("/application", applicationRoutes);
-*/
+
 
 /* ======================================
  ** ========= Server connection =========

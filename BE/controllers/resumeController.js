@@ -2,13 +2,13 @@ import db from '../config/db.js';
 
 const addResume = async (req, res) => {
     const { user_id } = req.params;
-    const { description, education, experience, skill, achievement } = req.body;
+    const { name, description, education, experience, skill, achievement } = req.body;
 
     try {
         // Insert the resume into the database
         const result = await db.query(
-            `INSERT INTO resume (user_id, description, education, experience, skill, achievement) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *`,
-            [user_id, description, education, experience, skill, achievement]
+            `INSERT INTO resume (user_id, name, description, education, experience, skill, achievement) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *`,
+            [user_id, name, description, education, experience, skill, achievement]
         );
 
         const newResume = result.rows[0];

@@ -8,6 +8,6 @@ router.get("/roles", userController.userRoles);
 
 router.post("/signup", userController.userSignup);
 router.post("/login", userController.userLogin);
-router.get("/profile", userController.getUserById);
+router.get("/:user_id", userController.getUserById);
 
 export default router;

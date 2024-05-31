@@ -1,12 +1,12 @@
 import db from '../config/db.js';
 
 const jobType = async (req, res) => {
-    const jobTypes = ['full_time', 'part_time', 'contract', 'internship', 'freelance'];
+    const jobTypes = ['Full Time', 'Part Time', 'Contract', 'Internship', 'Freelance'];
     res.json(jobTypes);
 }
 
 const field = async (req, res) => {
-    const fields = ['technology', 'finance', 'healthcare', 'education', 'marketing', 'sales'];
+    const fields = ['Technology', 'Finance', 'Healthcare', 'Education', 'Marketing', 'Sales'];
     res.json(fields);
 }
 
@@ -43,6 +43,72 @@ const getJob = async (req, res) => {
 
         const job = rows[0];
         res.status(200).json(job);
+    } catch (error) {
+        console.error('Error: ', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+}
+
+// Di beranda secara otomatis akan menampilkan semua baris dari tabel jobs -> di sisi job seeker
+const getAllJobs = async (req, res) => {
+    try {
+        const query = 
+        `SELECT jobs.title, users.name AS company_name, jobs.field, jobs.job_type
+        FROM jobs JOIN users ON jobs.company_id = users.id`;
+
+        const { rows } = await db.query(query);
+
+        if (rows.length === 0) {
+            return res.status(200).json([]);  // Mengembalikan array kosong
+        }        
+
+        res.status(200).json(rows);
+    } catch (error) {
+        console.error('Error: ', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+}
+
+// Di beranda secara otomatis menampilkan semua job yang telah diposting -> di sisi company
+const getAllPosts = async (req, res) => {
+    const { company_id } =req.params;
+
+    try {
+        const query = 
+        `SELECT jobs.title, jobs.field, jobs.job_type
+        FROM jobs WHERE company_id = $1`;
+
+        const { rows } = await db.query(query, [company_id]);
+
+        if (rows.length === 0) {
+            return res.status(404).json({ error: 'No Job Vacancies Posted' });
+        }
+
+        res.status(200).json(rows);
+    } catch (error) {
+        console.error('Error: ', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+}
+
+// Untuk menampilkan hasil berdasarkan fitur searching
+const searchJobs = async (req, res) => {
+    const { term } = req.params;
+
+    try {
+        const query = 
+        `SELECT jobs.title, users.name AS company_name, jobs.field, jobs.job_type
+        FROM jobs JOIN users ON jobs.company_id = users.id
+        WHERE title ILIKE $1
+        OR description ILIKE $1`;
+
+        const { rows } = await db.query(query, [`%${ term }%`]);
+
+        if (rows.length === 0) {
+            return res.status(404).json({ error: 'Job not found' });
+        }
+
+        res.status(200).json(rows);
     } catch (error) {
         console.error('Error: ', error);
         res.status(500).json({ error: 'Internal Server Error' });
@@ -124,6 +190,9 @@ export default {
     field,
     addJob,
     getJob,
+    getAllJobs,
+    getAllPosts,
+    searchJobs,
     getJobsByType,
     getJobsByLocation,
     getJobsByField
