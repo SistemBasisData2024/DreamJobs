@@ -1,11 +1,10 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import Home from './pages/Home';
 import Profile from './pages/Profile';
 import Job from './pages/Job';
 import Login from './components/Auth/Login';
 import Signup from './components/Auth/Signup';
-import Navbar from './components/Navbar';
 import './App.css';
 
 function App() {
@@ -13,11 +12,23 @@ function App() {
     <Router>
       <div className="app">
         <header>
-          <Navbar />
+          <nav className="navbar">
+            <img src="images/Logo.png" alt="logo" className="navbar-logo" />
+            <ul className="navbar-menu">
+              <li className="navbar-menu-item">
+                <Link to="/" className="navbar-link">Home</Link>
+              </li>
+              <li className="navbar-menu-item">
+                <Link to="/profile" className="navbar-link">
+                  <img src="images/ProfilePic.png" alt="profile" className="profile-pic" />
+                </Link>
+              </li>
+            </ul>
+          </nav>
         </header>
         <main>
           <Routes>
-            <Route path="/" element={<Home />} /> 
+            <Route path="/" element={<Home />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/job/:id" element={<Job />} />
             <Route path="/login" element={<Login />} />
@@ -26,7 +37,7 @@ function App() {
         </main>
       </div>
     </Router>
-  );// cuma biar homenya ga full white screen aja
+  );
 }
 
 export default App;

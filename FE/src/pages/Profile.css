@@ -3,7 +3,7 @@
     flex-direction: column;
     align-items: center;
     padding: 2rem;
-    background: #f5f5f5; /* Light grey background for the profile container */
+    background: linear-gradient(to bottom right, #f0f0f0, #b0c4de);
     border-radius: 8px; /* Rounded corners */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Light shadow for a subtle 3D effect */
     max-width: 600px; /* Set a max-width for the container */
@@ -15,7 +15,7 @@
     font-weight: bold;
     color: #333; /* Dark grey color for the title */
     margin-bottom: 1rem;
-    
+        
 }
 
 .profile-info {
