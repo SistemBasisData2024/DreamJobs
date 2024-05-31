@@ -1,6 +1,11 @@
 import db from '../config/db.js';
 import bcrypt from 'bcrypt';
 
+const userRoles = async (req, res) => {
+    const roles = ['Job Seeker', 'Company'];
+    res.json(roles);
+}
+
 const userSignup = async (req, res) => {
     const { name, email, password, role } = req.body;
 
@@ -55,6 +60,7 @@ const userLogin = async (req, res) => {
 }
 
 export default {
+    userRoles,
     userSignup,
     userLogin
 }

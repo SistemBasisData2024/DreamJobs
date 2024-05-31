@@ -43,7 +43,7 @@ const updateResume = async (req, res) => {
     const { description, education, experience, skill, achievement } = req.body;
 
     try {
-        // Insert the resume into the database
+        // Update resume's attribute(s)
         const result = await db.query(
             `UPDATE resume SET description=$1, education=$2, experience=$3, skill=$4, achievement=$5 WHERE id=$6 RETURNING *`,
             [description, education, experience, skill, achievement, id]

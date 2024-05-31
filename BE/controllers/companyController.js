@@ -5,7 +5,7 @@ const addDetail = async (req, res) => {
     const { description, address, contact } = req.body;
 
     try {
-        // Insert the resume into the database
+        // Insert the company into the database
         const result = await db.query(
             `INSERT INTO company (user_id, description, address, contact) VALUES ($1, $2, $3, $4) RETURNING *`,
             [user_id, description, address, contact]
@@ -17,7 +17,7 @@ const addDetail = async (req, res) => {
         console.error("Error: ", error);
         res.status(500).json({ error: "Internal Server Error" });
     }
-}
+};
 
 const getDetail = async (req, res) => {
     const { user_id } = req.params;
@@ -43,7 +43,7 @@ const updateDetail = async (req, res) => {
     const { description, address, contact } = req.body;
 
     try {
-        // Insert the resume into the database
+        // Update company's attribute(s)
         const result = await db.query(
             `UPDATE company SET description=$1, address=$2, contact=$3 WHERE id=$4 RETURNING *`,
             [description, address, contact, id]
@@ -59,7 +59,7 @@ const updateDetail = async (req, res) => {
         console.error("Error: ", error);
         res.status(500).json({ error: "Internal Server Error" });
     }
-}
+};
 
 export default {
     addDetail,

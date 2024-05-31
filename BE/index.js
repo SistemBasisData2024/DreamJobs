@@ -6,7 +6,7 @@ import cors from "cors";
 import db from "./config/db.js";
 
 import userRoutes from "./routes/userRoutes.js"
-//import jobRoutes from "./routes/job.routes.js"; -> buat isi job.routes dulu
+import jobRoutes from "./routes/jobRoutes.js";
 import resumeRoutes from "./routes/resumeRoutes.js";
 //import applicationRoutes from "./routes/application.routes.js";
 import companyRoutes from "./routes/companyRoutes.js";
@@ -42,7 +42,8 @@ app.use(helmet());
 app.use("/user", userRoutes);
 app.use("/resume", resumeRoutes);
 app.use("/company", companyRoutes);
-/*app.use("/jobs", jobRoutes);
+app.use("/jobs", jobRoutes);
+/*
 app.use("/application", applicationRoutes);
 */
 
