@@ -5,12 +5,15 @@ Berikut adalah langkah-langkah untuk membuat tabel-tabel dalam basis data Postgr
 ### Tabel Users
 
 ```sql
+CREATE TYPE roles AS ENUM ('Job Seeker', 'Company');
+```
+```sql
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,
     name VARCHAR(100),
     email VARCHAR(100) UNIQUE NOT NULL,
     password VARCHAR(255) NOT NULL,
-    role VARCHAR(50) NOT NULL, 
+    role roles NOT NULL, 
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 ```
@@ -37,3 +40,25 @@ CREATE TABLE company (
     address TEXT,
     contact TEXT
 );
+```
+### Tabel Jobs
+
+```sql
+CREATE TYPE job_type_enum AS ENUM ('full_time', 'part_time', 'contract', 'internship', 'freelance');
+```
+```sql
+CREATE TYPE field_enum AS ENUM ('technology', 'finance', 'healthcare', 'education', 'marketing', 'sales');
+```
+```sql
+CREATE TABLE jobs (
+    id SERIAL PRIMARY KEY,
+    company_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+    job_type job_type_enum NOT NULL,
+    field field_enum NOT NULL,
+    title VARCHAR(255) NOT NULL,
+    description TEXT NOT NULL,
+    location VARCHAR(255) NOT NULL,
+    posting_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+```
+
