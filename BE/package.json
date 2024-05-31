@@ -5,12 +5,8 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-<<<<<<< HEAD
     "start": "nodemon index.js",
     "dev": "nodemon index.js"
-=======
-    "start": "nodemon index.js"
->>>>>>> 959a4013751e263b534bfb48590e8536e26ab571
   },
   "author": "",
   "license": "ISC",

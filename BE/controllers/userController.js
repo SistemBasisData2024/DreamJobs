@@ -59,8 +59,31 @@ const userLogin = async (req, res) => {
     }
 }
 
+const getUserById = async (req, res) => {
+    const { id } = req.params;
+
+    try {
+        const query = `SELECT email, name, role FROM users WHERE id = $1`;
+
+        const { rows } = await db.query(query, [id]);
+
+        if (rows.length === 0) {
+            return res.status(404).json({ error: 'User not found' });
+        }
+
+        const user = rows[0];
+        res.status(200).json(user);
+    } catch (error) {
+        console.error('Error:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+};
+
+
+
 export default {
     userRoles,
     userSignup,
-    userLogin
+    userLogin,
+    getUserById
 }
