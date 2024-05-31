@@ -23,7 +23,7 @@ const Signup = () => {
         };
 
         fetchRoles();
-    }, []); // Menjalankan hanya sekali saat komponen dimuat pertama kali
+    }, []); 
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -32,10 +32,10 @@ const Signup = () => {
                 name: username,
                 email,
                 password,
-                role // Mengirim nilai role yang dipilih pengguna
+                role 
             });
             localStorage.setItem('token', res.data.token);
-            navigate('/'); // Navigasi ke halaman utama setelah berhasil signup
+            navigate('/'); 
         } catch (err) {
             console.error('Error signing up:', err);
         }
