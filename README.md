@@ -23,6 +23,7 @@ CREATE TABLE users (
 CREATE TABLE resume (
     id SERIAL PRIMARY KEY,
     user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+    name TEXT,
     description TEXT,
     education TEXT,
     experience TEXT,
@@ -61,4 +62,17 @@ CREATE TABLE jobs (
     posting_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 ```
+### Tabel Applications
 
+```sql
+CREATE TYPE application_status AS ENUM ('Screening', 'Interview', 'Offer', 'Reject');
+```
+```sql
+CREATE TABLE applications (
+    id SERIAL PRIMARY KEY,
+    job_id INTEGER REFERENCES jobs(id),
+    user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+    status application_status,
+    posting_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+```
