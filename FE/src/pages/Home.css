@@ -1,39 +1,84 @@
 .home {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: linear-gradient(to bottom right, #f0f0f0, #b0c4de);
+    color: #333;
     text-align: center;
-    padding: 2rem;
-    position: relative;
-    /* Tambahkan ini untuk memungkinkan positioning absolut */
 }
 
-h1 {
-    font-weight: bold;
-    color: yellowgreen;
-    font-style: italic;
-    /* Membuat teks menjadi bold */
+.home-header {
+    margin-bottom: 20px;
+}
+
+.logo {
+    width: 150px;
+}
+
+.home-main {
+    background: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .search-container {
     display: flex;
-    position: absolute;
-    left: 1rem;
-    /* Jarak dari bagian kiri halaman */
+    justify-content: center;
+    margin: 20px 0;
 }
 
 .search-input {
-    padding: 0.5rem;
+    padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px 0 0 5px;
-    border-right: none;
+    outline: none;
+    width: 300px;
 }
 
 .search-button {
-    background-color: #3b4f64;
-    color: #fff;
-    padding: 0.5rem 1rem;
-    border-radius: 5px;
-    text-decoration: none;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 0 5px 5px 0;
+    background-color: #3b5a6e;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
 }
 
 .search-button:hover {
-    background-color: #0056b3;
+    background-color: #3e607b;
+}
+
+.auth-buttons {
+    display: flex;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.login-button, .signup-button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    color: rgb(24, 23, 23);
+    transition: background-color 0.3s;
+}
+
+.login-button {
+    background-color: #93a1a9;
+}
+
+.signup-button {
+    background-color: #93a1a9;
+}
+
+.login-button:hover {
+    background-color: #4398a0;
+}
+
+.signup-button:hover {
+    background-color: #1e88e5;
 }

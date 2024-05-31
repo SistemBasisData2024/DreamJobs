@@ -17,16 +17,16 @@ const Profile = () => {
         };
         fetchProfile();
     }, []);
-
+    console.log(profile);
+    console.log(setProfile);
     if (!profile) return <div>Loading...</div>;
-
     return (
+        
         <div className="profile-container">
-            <h1 className="profile-title">{profile.user_name}'s Profile</h1>
+            <h1 className="profile-title">{profile.username}'s Profile</h1>
             <div className="profile-info">
                 <p>Email: {profile.email}</p>
                 <p>Username: {profile.username}</p>
-                <p>Interest: {profile.interest}</p>
                 <p>Role: {profile.role}</p>
             </div>
         </div>

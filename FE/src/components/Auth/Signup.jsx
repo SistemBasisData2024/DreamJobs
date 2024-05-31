@@ -4,27 +4,23 @@ import { useNavigate } from 'react-router-dom';
 import './Style.css';
 
 const Signup = () => {
-    const [userName, setUserName] = useState('');
+    const [username, setUsername] = useState(''); 
     const [email, setEmail] = useState('');
-    const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const [interest, setInterest] = useState('');
     const [role, setRole] = useState('');
-    const Navigate = useNavigate();
+    const navigate = useNavigate(); // Note the correct case: useNavigate instead of Navigate
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const res = await axios.post('/api/auth/signup', {
-                user_name: userName,
+            const res = await axios.post('http://localhost:4000/user/signup', { // Update the URL
+                name: username, // Match the expected keys from the backend
                 email,
-                username,
                 password,
-                interest,
                 role
             });
-            localStorage.setItem('token', res.data.token);
-            Navigate.push('/');
+            localStorage.setItem('token', res.data.token); // Assuming your backend sends a token in the response
+            navigate('/'); // Correct usage of navigate
         } catch (err) {
             console.error(err);
         }
@@ -34,9 +30,9 @@ const Signup = () => {
         <form onSubmit={handleSubmit}>
             <input
                 type="text"
-                value={userName}
-                onChange={(e) => setUserName(e.target.value)}
-                placeholder="Full Name"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                placeholder="Username"
             />
             <input
                 type="email"
@@ -45,28 +41,19 @@ const Signup = () => {
                 placeholder="Email"
             />
             <input
-                type="text"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-                placeholder="Username"
-            />
-            <input
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Password"
             />
-            <textarea
-                value={interest}
-                onChange={(e) => setInterest(e.target.value)}
-                placeholder="Interest"
-            />
-            <input
-                type="text"
+            <select
                 value={role}
                 onChange={(e) => setRole(e.target.value)}
-                placeholder="Role (job seeker/company)"
-            />
+            >
+                <option value="" disabled>Select Role</option>
+                <option value="job seeker">Job Seeker</option>
+                <option value="company">Company</option>
+            </select>
             <button type="submit">Sign Up</button>
         </form>
     );

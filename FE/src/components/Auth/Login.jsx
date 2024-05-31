@@ -6,33 +6,42 @@ import './Style.css';
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const Navigate = useNavigate();
+    const [error, setError] = useState('');
+    const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setError('');
         try {
-            const res = await axios.post('/api/auth/login', { email, password });
+            const res = await axios.post('http://localhost:4000/user/login', { // Update the URL
+                email,
+                password
+            });
             localStorage.setItem('token', res.data.token);
-            Navigate.push('/');
+            navigate('/profile'); // Navigate to the profile page
         } catch (err) {
             console.error(err);
+            setError('Login failed. Please check your email and password.');
         }
     };
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className="login-form">
             <input
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Email"
+                required
             />
             <input
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Password"
+                required
             />
+            {error && <p className="error">{error}</p>}
             <button type="submit">Login</button>
         </form>
     );
