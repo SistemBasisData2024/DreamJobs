@@ -58,6 +58,7 @@ CREATE TABLE jobs (
     job_type job_type_enum NOT NULL,
     field field_enum NOT NULL,
     title VARCHAR(255) NOT NULL,
+    position VARCHAR(100) NOT NULL,
     description TEXT NOT NULL,
     location VARCHAR(255) NOT NULL,
     posting_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
