@@ -8,15 +8,19 @@ const userRoles = async (req, res) => {
 
 const userSignup = async (req, res) => {
     const { name, email, password, role } = req.body;
+    const photo = req.file;
 
     try {
         // Hash the password
         const hashedPassword = await bcrypt.hash(password, 10);
 
+        // Construct the photo path
+        const photoPath = photo ? `/uploads/${photo.filename}` : null;
+
         // Insert the user into the database
         const result = await db.query(
-            `INSERT INTO users (name, email, password, role) VALUES ($1, $2, $3, $4) RETURNING *`,
-            [name, email, hashedPassword, role]
+            `INSERT INTO users (name, email, password, role, photo) VALUES ($1, $2, $3, $4, $5) RETURNING *`,
+            [name, email, hashedPassword, role, photoPath]
         );
 
         const newUser = result.rows[0];
@@ -63,7 +67,7 @@ const getUserById = async (req, res) => {
     const { user_id } = req.params;
 
     try {
-        const query = `SELECT email, name, role FROM users WHERE id = $1`;
+        const query = `SELECT email, name, role, photo FROM users WHERE id = $1`;
 
         const { rows } = await db.query(query, [user_id]);
 
