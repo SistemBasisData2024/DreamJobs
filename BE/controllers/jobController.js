@@ -13,12 +13,12 @@ const field = async (req, res) => {
 // Posting pekerjaan
 const addJob = async (req, res) => {
     const { company_id } = req.params;
-    const { job_type, field, title, description, location } = req.body;
+    const { job_type, field, title, position, description, location } = req.body;
 
     try {
         const result = await db.query(
-            `INSERT INTO jobs (company_id, job_type, field, title, description, location) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *`,
-            [company_id, job_type, field, title, description, location]
+            `INSERT INTO jobs (company_id, job_type, field, title, position, description, location) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *`,
+            [company_id, job_type, field, title, position, description, location]
         );
 
         const newJob = result.rows[0];
@@ -53,7 +53,7 @@ const getJob = async (req, res) => {
 const getAllJobs = async (req, res) => {
     try {
         const query = 
-        `SELECT jobs.title, users.name AS company_name, jobs.field, jobs.job_type
+        `SELECT jobs.title, users.name AS company_name, jobs.position, jobs.field, jobs.job_type
         FROM jobs JOIN users ON jobs.company_id = users.id`;
 
         const { rows } = await db.query(query);
@@ -75,7 +75,7 @@ const getAllPosts = async (req, res) => {
 
     try {
         const query = 
-        `SELECT jobs.title, jobs.field, jobs.job_type
+        `SELECT jobs.title, jobs.position, jobs.field, jobs.job_type
         FROM jobs WHERE company_id = $1`;
 
         const { rows } = await db.query(query, [company_id]);
@@ -97,7 +97,7 @@ const searchJobs = async (req, res) => {
 
     try {
         const query = 
-        `SELECT jobs.title, users.name AS company_name, jobs.field, jobs.job_type
+        `SELECT jobs.title, users.name AS company_name, jobs.position, jobs.field, jobs.job_type
         FROM jobs JOIN users ON jobs.company_id = users.id
         WHERE title ILIKE $1
         OR description ILIKE $1`;
@@ -121,7 +121,7 @@ const getJobsByType = async (req, res) => {
 
     try {
         const query = 
-            `SELECT jobs.title, users.name AS company_name, jobs.field, jobs.job_type
+            `SELECT jobs.title, users.name AS company_name, jobs.position, jobs.field, jobs.job_type
              FROM jobs JOIN users ON jobs.company_id = users.id
              WHERE jobs.job_type = $1`;
 
@@ -144,7 +144,7 @@ const getJobsByField = async (req, res) => {
 
     try {
         const query = 
-            `SELECT jobs.title, users.name AS company_name, jobs.field, jobs.job_type
+            `SELECT jobs.title, users.name AS company_name, jobs.position, jobs.field, jobs.job_type
              FROM jobs JOIN users ON jobs.company_id = users.id
              WHERE jobs.field = $1`;
 
@@ -167,7 +167,7 @@ const getJobsByLocation = async (req, res) => {
 
     try {
         const query = 
-            `SELECT jobs.title, users.name AS company_name, jobs.field, jobs.job_type
+            `SELECT jobs.title, users.name AS company_name, jobs.position, jobs.field, jobs.job_type
              FROM jobs JOIN users ON jobs.company_id = users.id
              WHERE jobs.location = $1`;
 
