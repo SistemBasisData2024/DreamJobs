@@ -79,6 +79,6 @@ CREATE TABLE applications (
 );
 ```
 
-### Flowchart
+# Flowchart
 
 ![Dreamjobs_Flowchart](https://github.com/SistemBasisData2024/DreamJobs/assets/120215928/eef63ff7-ef0e-4938-b70c-800442675f1c)
