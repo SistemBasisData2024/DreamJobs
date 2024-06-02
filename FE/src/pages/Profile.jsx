@@ -6,21 +6,6 @@ const Profile = () => {
     const [profile, setProfile] = useState(null);
 
     useEffect(() => {
-<<<<<<< HEAD
-        const token = localStorage.getItem('token');
-        const userId = 'user_id'; 
-        const fetchUserProfile = async () => {
-            try {
-                const res = await axios.get(`http://localhost:4000/user/${userId}`, {
-                    headers: {
-                        Authorization: `Bearer ${token}`
-                    }
-                });
-                setProfile(res.data);
-            } catch (error) {
-                console.error('Error fetching profile:', error);
-            }
-=======
         const fetchProfile = async () => {
             const token = localStorage.getItem('token');
             const res = await axios.get('http://localhost:4000/user/profile', {
@@ -29,12 +14,11 @@ const Profile = () => {
                 }
             });
             setProfile(res.data);
->>>>>>> 0d4a826a537dab92112a992ac0b9f632a8aaf5c9
         };
-
-        fetchUserProfile();
+        fetchProfile();
     }, []);
-
+    console.log(profile);
+    console.log(setProfile);
     if (!profile) return <div>Loading...</div>;
 
     return (

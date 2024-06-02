@@ -44,7 +44,6 @@ const Login = () => {
             />
             {error && <p className="error">{error}</p>}
             <button type="submit">Login</button>
-            {/* Add the Link component for sign up */}
             <p>Don't have an account? <Link to="/signup">Sign Up</Link></p>
         </form>
     );

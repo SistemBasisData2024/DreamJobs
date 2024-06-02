@@ -8,7 +8,7 @@ const Signup = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [role, setRole] = useState('');
-<<<<<<< HEAD
+    const [photo, setPhoto] = useState(null);
     const [roleOptions, setRoleOptions] = useState([]);
     const navigate = useNavigate();
 
@@ -17,36 +17,38 @@ const Signup = () => {
             try {
                 const response = await axios.get('http://localhost:4000/user/roles');
                 setRoleOptions(response.data);
-=======
-    const [roleOptions, setRoleOptions] = useState([]); // State untuk menyimpan opsi role
-    const navigate = useNavigate();
-
-    useEffect(() => {
-        // Memuat opsi role dari API saat komponen dimuat
-        const fetchRoles = async () => {
-            try {
-                const response = await axios.get('http://localhost:4000/user/roles');
-                setRoleOptions(response.data); // Menyimpan opsi role ke dalam state
->>>>>>> 0d4a826a537dab92112a992ac0b9f632a8aaf5c9
             } catch (error) {
                 console.error('Error fetching roles:', error);
             }
         };
 
         fetchRoles();
-    }, []); 
+    }, []);
+
+    const handleFileChange = (e) => {
+        setPhoto(e.target.files[0]);
+    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        const formData = new FormData();
+        formData.append('name', username);
+        formData.append('email', email);
+        formData.append('password', password);
+        formData.append('role', role);
+        if (photo) {
+            formData.append('photo', photo);
+        }
+
         try {
-            const res = await axios.post('http://localhost:4000/user/signup', {
-                name: username,
-                email,
-                password,
-                role 
+            const res = await axios.post('http://localhost:4000/user/signup', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
             });
             localStorage.setItem('token', res.data.token);
-            navigate('/'); 
+            navigate('/');
         } catch (err) {
             console.error('Error signing up:', err);
         }
@@ -81,15 +83,15 @@ const Signup = () => {
                 required
             >
                 <option value="" disabled>Select Role</option>
-<<<<<<< HEAD
-                <option value="Job Seeker">Job Seeker</option>
-                <option value="Company">Company</option>
-=======
-                {roleOptions.map((option) => (
-                    <option key={option} value={option}>{option}</option>
+                {roleOptions.map((roleOption, index) => (
+                    <option key={index} value={roleOption}>{roleOption}</option>
                 ))}
->>>>>>> 0d4a826a537dab92112a992ac0b9f632a8aaf5c9
             </select>
+            <input
+                type="file"
+                onChange={handleFileChange}
+                accept="image/*"
+            />
             <button type="submit">Sign Up</button>
         </form>
     );
