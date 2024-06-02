@@ -1,3 +1,6 @@
+.profile {
+    background: linear-gradient(to bottom right, #f0f0f0, #b0c4de);
+}
 .profile-container {
     display: flex;
     flex-direction: column;
@@ -31,4 +34,11 @@
 
 p {
     color: black;
+}
+
+.profile-photo {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
 }

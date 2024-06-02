@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom'; // Import Link from react-router-dom
 import './Style.css';
 
 const Login = () => {
@@ -43,6 +44,8 @@ const Login = () => {
             />
             {error && <p className="error">{error}</p>}
             <button type="submit">Login</button>
+            {/* Add the Link component for sign up */}
+            <p>Don't have an account? <Link to="/signup">Sign Up</Link></p>
         </form>
     );
 };

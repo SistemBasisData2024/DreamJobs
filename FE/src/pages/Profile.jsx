@@ -6,28 +6,34 @@ const Profile = () => {
     const [profile, setProfile] = useState(null);
 
     useEffect(() => {
-        const fetchProfile = async () => {
-            const token = localStorage.getItem('token');
-            const res = await axios.get('/api/profile', {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
-            });
-            setProfile(res.data);
+        const token = localStorage.getItem('token');
+        const userId = 'user_id'; 
+        const fetchUserProfile = async () => {
+            try {
+                const res = await axios.get(`http://localhost:4000/user/${userId}`, {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                });
+                setProfile(res.data);
+            } catch (error) {
+                console.error('Error fetching profile:', error);
+            }
         };
-        fetchProfile();
+
+        fetchUserProfile();
     }, []);
-    console.log(profile);
-    console.log(setProfile);
+
     if (!profile) return <div>Loading...</div>;
+
     return (
-        
         <div className="profile-container">
-            <h1 className="profile-title">{profile.username}'s Profile</h1>
+            <h1 className="profile-title">{profile.name}'s Profile</h1>
             <div className="profile-info">
                 <p>Email: {profile.email}</p>
-                <p>Username: {profile.username}</p>
+                <p>Username: {profile.name}</p>
                 <p>Role: {profile.role}</p>
+                {profile.photo && <img src={profile.photo} alt="Profile" />}
             </div>
         </div>
     );

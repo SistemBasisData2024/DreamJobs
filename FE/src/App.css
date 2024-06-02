@@ -1,44 +1,54 @@
+/* App.css */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
 .app {
-  font-family: 'Arial', sans-serif;
+  text-align: center;
 }
 
 .navbar {
+  width: 100%;
+  background-color: #ffffff;
+  position: fixed; /* Make the navbar fixed */
+  top: 0; /* Align it to the top */
+  z-index: 1000; /* Ensure it appears above other content */
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 20px;
-  background-color: #fff;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 0 20px;
 }
 
 .navbar-logo {
-  width: 100px;
+  height: 60px;
 }
 
 .navbar-menu {
-  list-style: none;
-  display: flex;
-  gap: 20px;
-}
-
-.navbar-menu-item {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
   display: flex;
   align-items: center;
 }
 
-.navbar-link {
-  text-decoration: none;
-  color: #333;
-  font-weight: bold;
-  transition: color 0.3s;
+.navbar-menu-item {
+  margin-left: 20px;
 }
 
-.navbar-link:hover {
-  color: #5c7682;
+.navbar-link {
+  color: rgb(9, 9, 9);
+  text-decoration: none;
+  font-size: 18px;
 }
 
 .profile-pic {
-  width: 40px;
   height: 40px;
   border-radius: 50%;
 }
+
+main {
+  padding-top: 70px; /* Add padding to avoid content being hidden under the fixed navbar */
+}
+
