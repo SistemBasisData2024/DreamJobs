@@ -78,3 +78,10 @@ CREATE TABLE applications (
     posting_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 ```
+<<<<<<< HEAD
+=======
+
+# Flowchart
+
+![Dreamjobs_Flowchart](https://github.com/SistemBasisData2024/DreamJobs/assets/120215928/eef63ff7-ef0e-4938-b70c-800442675f1c)
+>>>>>>> 0d4a826a537dab92112a992ac0b9f632a8aaf5c9

@@ -8,6 +8,7 @@ const Signup = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [role, setRole] = useState('');
+<<<<<<< HEAD
     const [roleOptions, setRoleOptions] = useState([]);
     const navigate = useNavigate();
 
@@ -16,6 +17,17 @@ const Signup = () => {
             try {
                 const response = await axios.get('http://localhost:4000/user/roles');
                 setRoleOptions(response.data);
+=======
+    const [roleOptions, setRoleOptions] = useState([]); // State untuk menyimpan opsi role
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        // Memuat opsi role dari API saat komponen dimuat
+        const fetchRoles = async () => {
+            try {
+                const response = await axios.get('http://localhost:4000/user/roles');
+                setRoleOptions(response.data); // Menyimpan opsi role ke dalam state
+>>>>>>> 0d4a826a537dab92112a992ac0b9f632a8aaf5c9
             } catch (error) {
                 console.error('Error fetching roles:', error);
             }
@@ -69,8 +81,14 @@ const Signup = () => {
                 required
             >
                 <option value="" disabled>Select Role</option>
+<<<<<<< HEAD
                 <option value="Job Seeker">Job Seeker</option>
                 <option value="Company">Company</option>
+=======
+                {roleOptions.map((option) => (
+                    <option key={option} value={option}>{option}</option>
+                ))}
+>>>>>>> 0d4a826a537dab92112a992ac0b9f632a8aaf5c9
             </select>
             <button type="submit">Sign Up</button>
         </form>
