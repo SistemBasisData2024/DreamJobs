@@ -44,20 +44,13 @@ app.use("/application", applicationRoutes);
 
 // Static files
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-<<<<<<< HEAD
-=======
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
-
->>>>>>> 3215b3d6253b4415c34f891f89058777c6bca0eb
 app.use('/uploads', (req, res, next) => {
   res.set('Cross-Origin-Resource-Policy', 'cross-origin');
   next();
 });
-<<<<<<< HEAD
-
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
-=======
->>>>>>> 3215b3d6253b4415c34f891f89058777c6bca0eb
+
+
 /* ======================================
  ** ========= Server connection =========
  ** ===================================== */
