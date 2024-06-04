@@ -18,14 +18,12 @@
     font-weight: bold;
     color: #333; /* Dark grey color for the title */
     margin-bottom: 1rem;
-        
 }
 
 .profile-info {
     font-size: 1.2rem;
     color: #8b8181; /* Medium grey color for the text */
     line-height: 1.6;
-    
 }
 
 .profile-info p {
@@ -37,8 +35,7 @@ p {
 }
 
 .profile-photo {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    object-fit: cover;
+    width: 150px; /* Atur lebar foto profil sesuai kebutuhan */
+    height: auto; /* Biarkan ketinggian sesuai proporsi */
+    margin-right: 20px; /* Jarak antara foto dan informasi profil */
 }

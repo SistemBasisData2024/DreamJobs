@@ -66,7 +66,7 @@ const userLogin = async (req, res) => {
 const getUserById = async (req, res) => {
     const { user_id } = req.params;
 
-    try {
+    try { 
         const query = `SELECT email, name, role, photo FROM users WHERE id = $1`;
 
         const { rows } = await db.query(query, [user_id]);

@@ -18,7 +18,12 @@ const Login = () => {
                 email,
                 password
             });
-            localStorage.setItem('token', res.data.token);
+            const { token, user } = res.data;
+            const { id } = user;
+
+            localStorage.setItem('token', token);
+            localStorage.setItem('user_id', id);
+            
             navigate('/profile'); // Navigate to the profile page
         } catch (err) {
             console.error(err);
