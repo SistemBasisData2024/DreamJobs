@@ -66,7 +66,11 @@ const userLogin = async (req, res) => {
 const getUserById = async (req, res) => {
     const { user_id } = req.params;
 
+<<<<<<< HEAD
     try {
+=======
+    try { 
+>>>>>>> 3215b3d6253b4415c34f891f89058777c6bca0eb
         const query = `SELECT email, name, role, photo FROM users WHERE id = $1`;
 
         const { rows } = await db.query(query, [user_id]);
@@ -74,7 +78,7 @@ const getUserById = async (req, res) => {
         if (rows.length === 0) {
             return res.status(404).json({ error: 'User not found' });
         }
-
+ 
         const user = rows[0];
         res.status(200).json(user);
     } catch (error) {
