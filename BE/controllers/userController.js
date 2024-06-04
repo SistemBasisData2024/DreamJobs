@@ -64,12 +64,12 @@ const userLogin = async (req, res) => {
 }
 
 const getUserById = async (req, res) => {
-    const { id } = req.params;
+    const { user_id } = req.params;
 
     try {
-        const query = `SELECT email, name, role FROM users WHERE id = $1`;
+        const query = `SELECT email, name, role, photo FROM users WHERE id = $1`;
 
-        const { rows } = await db.query(query, [id]);
+        const { rows } = await db.query(query, [user_id]);
 
         if (rows.length === 0) {
             return res.status(404).json({ error: 'User not found' });
@@ -82,6 +82,7 @@ const getUserById = async (req, res) => {
         res.status(500).json({ error: 'Internal Server Error' });
     }
 };
+
 
 export default {
     userRoles,
