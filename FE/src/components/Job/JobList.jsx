@@ -1,30 +1,20 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+// src/components/JobList.jsx
+import React from 'react';
 import { Link } from 'react-router-dom';
 
-const JobList = () => {
-    const [jobs, setJobs] = useState([]);
-
-    useEffect(() => {
-        const fetchJobs = async () => {
-            const res = await axios.get('/api/jobs');
-            setJobs(res.data);
-        };
-        fetchJobs();
-    }, []);
-
-    return (
-        <div>
-            {jobs.map(job => (
-                <div key={job.job_id}>
-                    <Link to={`/job/${job.job_id}`}>
-                        <h3>{job.title}</h3>
-                    </Link>
-                    <p>{job.description}</p>
-                </div>
-            ))}
-        </div>
-    );
-};
+const JobList = ({ jobs }) => (
+  <div className="job-list">
+    {jobs.map(job => (
+      <div key={job.id} className="job-item">
+        <h3>{job.title}</h3>
+        <p>{job.company_name}</p>
+        <p>{job.position}</p>
+        <p>{job.field}</p>
+        <p>{job.job_type}</p>
+        <Link to={`/job/${job.id}`}>View Details</Link>
+      </div>
+    ))}
+  </div>
+);
 
 export default JobList;
