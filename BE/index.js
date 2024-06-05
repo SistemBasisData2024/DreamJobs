@@ -44,12 +44,13 @@ app.use("/application", applicationRoutes);
 
 // Static files
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
-
 app.use('/uploads', (req, res, next) => {
   res.set('Cross-Origin-Resource-Policy', 'cross-origin');
   next();
 });
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
+
 /* ======================================
  ** ========= Server connection =========
  ** ===================================== */

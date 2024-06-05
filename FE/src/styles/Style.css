@@ -1,5 +1,3 @@
-/* Style.css */
-
 .login-form {
     display: flex;
     flex-direction: column;
@@ -15,6 +13,27 @@
     border-radius: 5px;
     border: 1px solid #ccc;
     width: 300px;
+}
+
+.password-container {
+    position: relative;
+    width: 300px;
+    margin: 10px 0;
+}
+
+.password-container input {
+    width: 100%;
+    padding-right: 2.5rem;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.eye-icon {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
 }
 
 .login-form button {

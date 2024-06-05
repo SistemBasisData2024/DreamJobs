@@ -7,22 +7,22 @@
     align-items: center;
     padding: 2rem;
     background: linear-gradient(to bottom right, #f0f0f0, #b0c4de);
-    border-radius: 8px; /* Rounded corners */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Light shadow for a subtle 3D effect */
-    max-width: 600px; /* Set a max-width for the container */
-    margin: 2rem auto; /* Center the container with margin */
+    border-radius: 8px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    max-width: 600px; 
+    margin: 2rem auto; 
 }
 
 .profile-title {
     font-size: 2rem;
     font-weight: bold;
-    color: #333; /* Dark grey color for the title */
+    color: #333; 
     margin-bottom: 1rem;
 }
 
 .profile-info {
     font-size: 1.2rem;
-    color: #8b8181; /* Medium grey color for the text */
+    color: #8b8181; 
     line-height: 1.6;
 }
 
@@ -38,4 +38,6 @@ p {
     width: 150px; /* Atur lebar foto profil sesuai kebutuhan */
     height: auto; /* Biarkan ketinggian sesuai proporsi */
     margin-right: 20px; /* Jarak antara foto dan informasi profil */
+    border-radius: 50%;
+    
 }

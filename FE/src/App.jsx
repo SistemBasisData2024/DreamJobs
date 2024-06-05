@@ -1,43 +1,31 @@
-import React from 'react';
-import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Home from './pages/Home';
+import Login from './pages/Login';
+import Signup from './pages/Signup';
 import Profile from './pages/Profile';
-import Job from './pages/Job';
-import Login from './components/Auth/Login';
-import Signup from './components/Auth/Signup';
-import './App.css';
+import Logout from './components/Logout'; // import the Logout component
+import Navbar from './components/Navbar';
+import UserContext from './UserContext'; // import UserContext
 
-function App() {
+const App = () => {
+  const [user, setUser] = useState(null); // create user state
+
   return (
-    <Router>
-      <div className="app">
-        <header>
-          <nav className="navbar">
-            <img src="images/Logo.png" alt="logo" className="navbar-logo" />
-            <ul className="navbar-menu">
-              <li className="navbar-menu-item">
-                <Link to="/" className="navbar-link">Home</Link>
-              </li>
-              <li className="navbar-menu-item">
-                <Link to="/profile" className="navbar-link">
-                  <img src="images/ProfilePic.png" alt="profile" className="profile-pic" />
-                </Link>
-              </li>
-            </ul>
-          </nav>
-        </header>
-        <main>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/job/:id" element={<Job />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/signup" element={<Signup />} />
-          </Routes>
-        </main>
-      </div>
-    </Router>
+    <UserContext.Provider value={{ user, setUser }}> {/* provide user state */}
+      <Router>
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Navigate to="/login" replace />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/logout" element={<Logout />} /> {/* Add this line */}
+        </Routes>
+      </Router>
+    </UserContext.Provider>
   );
-}
+};
 
 export default App;
