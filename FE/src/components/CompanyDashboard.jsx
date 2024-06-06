@@ -1,34 +1,43 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { UserContext } from '../UserContexts';
+import '../styles/CompanyDashboard.css';
 
 const CompanyDashboard = () => {
+  const { user } = useContext(UserContext); // Extract user from context
   const [jobs, setJobs] = useState([]);
 
   useEffect(() => {
-    fetchJobs();
-  }, []);
+    const fetchJobs = async (user_id) => {
+      try {
+        const response = await axios.get(`http://localhost:4000/jobs/getAllPosts/${user_id}`);
+        setJobs(response.data);
+      } catch (error) {
+        console.error('Error fetching jobs', error);
+      }
+    };
 
-  const fetchJobs = async () => {
-    try {
-      const response = await axios.get('/api/company/jobs');
-      setJobs(response.data);
-    } catch (error) {
-      console.error('Error fetching jobs', error);
+    if (user && user.id) {
+      fetchJobs(user.id); // Pass user_id to fetchJobs function
     }
-  };
+  }, [user]);
 
   return (
     <div>
-      <h1>Company Dashboard</h1>
-      <ul>
-        {jobs.map(job => (
-          <li key={job.id}>
+      <div className="job-cards-container">
+        {jobs.map((job) => (
+          <div key={job.id} className="job-card">
             <h2>{job.title}</h2>
-            <p>{job.description}</p>
-            {/* Link to view applications for this job */}
-          </li>
+            <p><strong>Position:</strong> {job.position}</p>
+            <p><strong>Field:</strong> {job.field}</p>
+            <p><strong>Job Type:</strong> {job.job_type}</p>
+            <Link to="#" className="show-applicants-button">
+              Show Applicants
+            </Link>
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
   );
 };

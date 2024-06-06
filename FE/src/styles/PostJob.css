@@ -1,0 +1,44 @@
+.post-container {
+    display: flex;
+    justify-content: center; /* Untuk memusatkan form jika perlu */
+}
+
+.job-form {
+    display: flex;
+    flex-direction: column;
+    max-width: 600px; /* Atur lebar maksimum form sesuai kebutuhan */
+    width: 100%;
+}
+
+.form-group {
+    margin-bottom: 1rem; /* Atur jarak antara setiap elemen form */
+}
+
+.label {
+    margin-bottom: 0.5rem;
+}
+
+input[type="text"],
+textarea,
+select {
+    width: 100%;
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.button {
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+button:hover {
+    background-color: #4d92db;
+}
+ 

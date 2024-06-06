@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import '../styles/Resume.css';
+import { UserContext } from '../UserContexts'; // Pastikan jalur yang benar ke UserContext
 
-const Resume = ({ user_id, resumeId }) => {
+const Resume = () => {
+    const { user } = useContext(UserContext); // Mengambil user dari UserContext
     const [formData, setFormData] = useState({
         name: '',
         description: '',
@@ -23,35 +25,36 @@ const Resume = ({ user_id, resumeId }) => {
     const handleAddSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post(`http://localhost:4000/resume/${user_id}`, formData);
-            console.log('Resume added:', response.data);
+            const response = await axios.post(`http://localhost:4000/resume/${user.id}`, formData);
+            console.log('Resume ditambahkan:', response.data);
             setResume(response.data);
         } catch (error) {
-            console.error('Error adding resume:', error);
+            console.error('Error menambahkan resume:', error);
         }
     };
 
     const handleUpdateSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.put(`http://localhost:4000/resume/${resumeId}`, formData);
-            console.log('Resume updated:', response.data);
+            const response = await axios.put(`http://localhost:4000/resume/${resume.id}`, formData);
+            console.log('Resume diperbarui:', response.data);
             setResume(response.data);
             setIsEditMode(false);
         } catch (error) {
-            console.error('Error updating resume:', error);
+            console.error('Error memperbarui resume:', error);
         }
     };
 
     const fetchResume = async () => {
-        if (!user_id) {
-            console.error('user_id is undefined');
+        if (!user || !user.id) {
+            console.error('User ID tidak ditemukan atau null');
             return;
         }
         try {
-            const response = await axios.get(`http://localhost:4000/resume/${user_id}`);
+            const response = await axios.get(`http://localhost:4000/resume/${user.id}`);
             setResume(response.data);
             setFormData({
+                name: response.data.name,
                 description: response.data.description,
                 education: response.data.education,
                 experience: response.data.experience,
@@ -59,17 +62,15 @@ const Resume = ({ user_id, resumeId }) => {
                 achievement: response.data.achievement
             });
         } catch (error) {
-            console.error('Error fetching resume:', error);
+            console.error('Error mengambil resume:', error);
         }
     };
 
     useEffect(() => {
-        if (user_id) {
+        if (user && user.id) {
             fetchResume();
-        } else {
-            console.error('user_id is undefined or null');
         }
-    }, [user_id]);
+    }, [user]);
 
     return (
         <div className="resume-container">
@@ -84,10 +85,7 @@ const Resume = ({ user_id, resumeId }) => {
                     <button className="resume-edit-button" onClick={() => setIsEditMode(true)}>Edit Resume</button>
                 </div>
             ) : (
-                <p>Loading...</p>
-            )}
-            <form className="resume-form" onSubmit={isEditMode ? handleUpdateSubmit : handleAddSubmit}>
-                {!isEditMode && (
+                <form className="resume-form" onSubmit={handleAddSubmit}>
                     <input
                         name="name"
                         value={formData.name}
@@ -95,44 +93,85 @@ const Resume = ({ user_id, resumeId }) => {
                         placeholder="Name"
                         required
                     />
-                )}
-                <textarea
-                    name="description"
-                    value={formData.description}
-                    onChange={handleChange}
-                    placeholder="Description"
-                    required
-                />
-                <input
-                    name="education"
-                    value={formData.education}
-                    onChange={handleChange}
-                    placeholder="Education"
-                    required
-                />
-                <input
-                    name="experience"
-                    value={formData.experience}
-                    onChange={handleChange}
-                    placeholder="Experience"
-                    required
-                />
-                <input
-                    name="skill"
-                    value={formData.skill}
-                    onChange={handleChange}
-                    placeholder="Skill"
-                    required
-                />
-                <input
-                    name="achievement"
-                    value={formData.achievement}
-                    onChange={handleChange}
-                    placeholder="Achievement"
-                    required
-                />
-                <button type="submit">{isEditMode ? 'Update Resume' : 'Add Resume'}</button>
-            </form>
+                    <textarea
+                        name="description"
+                        value={formData.description}
+                        onChange={handleChange}
+                        placeholder="Description"
+                        required
+                    />
+                    <input
+                        name="education"
+                        value={formData.education}
+                        onChange={handleChange}
+                        placeholder="Education"
+                        required
+                    />
+                    <input
+                        name="experience"
+                        value={formData.experience}
+                        onChange={handleChange}
+                        placeholder="Experience"
+                        required
+                    />
+                    <input
+                        name="skill"
+                        value={formData.skill}
+                        onChange={handleChange}
+                        placeholder="Skill"
+                        required
+                    />
+                    <input
+                        name="achievement"
+                        value={formData.achievement}
+                        onChange={handleChange}
+                        placeholder="Achievement"
+                        required
+                    />
+                    <button type="submit">Add Resume</button>
+                </form>
+            )}
+            {isEditMode && (
+                <form className="resume-form" onSubmit={handleUpdateSubmit}>
+                    <textarea
+                        name="description"
+                        value={formData.description}
+                        onChange={handleChange}
+                        placeholder="Description"
+                        required
+                    />
+                    <input
+                        name="education"
+                        value={formData.education}
+                        onChange={handleChange}
+                        placeholder="Education"
+                        required
+                    />
+                    <input
+                        name="experience"
+                        value={formData.experience}
+                        onChange={handleChange}
+                        placeholder="Experience"
+                        required
+                    />
+                    <input
+                        name="skill"
+                        value={formData.skill}
+                        onChange={handleChange}
+                        placeholder="Skill"
+                        required
+                    />
+                    <input
+                        name="achievement"
+                        value={formData.achievement}
+                        onChange={handleChange}
+                        placeholder="Achievement"
+                        required
+                    />
+                    <button type="submit">Update Resume</button>
+                    <button type="button" onClick={() => setIsEditMode(false)}>Cancel</button>
+                </form>
+            )}
         </div>
     );
 };

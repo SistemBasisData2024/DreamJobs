@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import '../styles/Style.css';
-import UserContext from '../UserContext';
+import { UserContext } from '../UserContexts';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
@@ -24,15 +24,20 @@ const Login = () => {
                 password
             });
             const { token, user } = res.data;
-            const { id, photo } = user;
+            const { id, photo, role } = user;
 
             localStorage.setItem('token', token);
             localStorage.setItem('user_id', id);
+            localStorage.setItem('role', role);
             localStorage.setItem('user_photo', `http://localhost:4000${photo}`);
 
-            setUser({ profileImageUrl: `http://localhost:4000${photo}` });
-
-            navigate('/dashboard');
+            setUser({ id, role, profileImageUrl: `http://localhost:4000${photo}` });
+            
+            if (role === 'Job Seeker') {
+                navigate('/dashboard'); // Navigate to the dashboard for Job Seeker
+            } else if (role === 'Company') {
+                navigate('/companyDashboard'); // Navigate to the dashboard for Company
+            }
         } catch (err) {
             console.error(err);
             setError('Login failed. Please check your email and password.');
