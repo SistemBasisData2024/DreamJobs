@@ -31,6 +31,7 @@ const Navbar = () => {
                             />
                             {isDropdownVisible && (
                                 <ul className="navbar-dropdown">
+                                    <li><Link to="/dashboard">Dashboard</Link></li>
                                     <li><Link to="/profile">Lihat Profile</Link></li>
                                     <li><Link to="/add-resume">Add Resume</Link></li>
                                     <li onClick={handleLogout}><Link to="/login">Logout</Link></li> {/* Change this line */}

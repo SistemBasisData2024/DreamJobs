@@ -32,7 +32,7 @@ const Login = () => {
 
             setUser({ profileImageUrl: `http://localhost:4000${photo}` });
 
-            navigate('/profile');
+            navigate('/dashboard');
         } catch (err) {
             console.error(err);
             setError('Login failed. Please check your email and password.');

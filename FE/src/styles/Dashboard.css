@@ -1,0 +1,56 @@
+.dashboard {
+  padding: rem;
+}
+
+.search-bar {
+  display: flex;
+  margin-bottom: 1rem;
+}
+
+.search-bar input {
+  flex: 1;
+  padding: 0.5rem;
+  margin-right: 0.5rem;
+}
+
+.search-button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 0 5px 5px 0;
+  background-color: #3b5a6e;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.job-filters {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.job-filters select {
+  flex: 1;
+  margin-right: 0.5rem;
+  padding: 0.5rem;
+}
+
+.job-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.job-item {
+  border: 1px solid #ccc;
+  padding: 1rem;
+  border-radius: 5px;
+}
+
+.job-item h3 {
+  margin-top: 0;
+}
+
+.job-item p {
+  margin: 0.5rem 0;
+}

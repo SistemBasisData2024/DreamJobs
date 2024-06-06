@@ -4,24 +4,29 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Profile from './pages/Profile';
-import Logout from './components/Logout'; // import the Logout component
+import Logout from './components/Logout';
 import Navbar from './components/Navbar';
-import UserContext from './UserContext'; // import UserContext
+import UserContext from './UserContext';
+import Dashboard from './components/Dashboard';
+import CompanyDashboard from './components/CompanyDashboard';
+import Resume from './components/Resume';
 
 const App = () => {
-  const [user, setUser] = useState(null); // create user state
+  const [user, setUser] = useState(null);
 
   return (
-    <UserContext.Provider value={{ user, setUser }}> {/* provide user state */}
+    <UserContext.Provider value={{ user, setUser }}>
       <Router>
         <Navbar />
         <Routes>
-          <Route path="/" element={<Navigate to="/login" replace />} />
+          <Route path="/" element={<Navigate to="/home" replace />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/home" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
-          <Route path="/logout" element={<Logout />} /> {/* Add this line */}
+          <Route path="/logout" element={<Logout />} />
+          <Route path="/add-resume" element={<Resume />} />
+          <Route path="/dashboard" element={user ? (user.role === 'Company' ? <CompanyDashboard /> : <Dashboard />) : <Navigate to="/login" replace />} />
         </Routes>
       </Router>
     </UserContext.Provider>

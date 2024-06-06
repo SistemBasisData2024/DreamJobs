@@ -78,7 +78,8 @@ CREATE TABLE applications (
     posting_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 ```
-
+# Entity Relationship Diagram (ERD)
+![Dreamjobs_ERD](https://github.com/SistemBasisData2024/DreamJobs/blob/17fc57318490475b1e1178fea852f2ba6bf80b1a/Dreamjobs_ERD.jpg)
 # Flowchart
 
 ![Dreamjobs_Flowchart](https://github.com/SistemBasisData2024/DreamJobs/assets/120215928/eef63ff7-ef0e-4938-b70c-800442675f1c)

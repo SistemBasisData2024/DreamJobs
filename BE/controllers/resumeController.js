@@ -22,6 +22,10 @@ const addResume = async (req, res) => {
 const getResume = async (req, res) => {
     const { user_id } = req.params;
 
+    if (!user_id) {
+        return res.status(400).json({ error: 'user_id is required' });
+    }
+
     try {
         const query = 'SELECT * FROM resume WHERE user_id = $1';
         const { rows } = await db.query(query, [user_id]);
@@ -37,6 +41,7 @@ const getResume = async (req, res) => {
         res.status(500).json({ error: 'Internal Server Error' });
     }
 };
+
 
 const updateResume = async (req, res) => {
     const { id } = req.params;
