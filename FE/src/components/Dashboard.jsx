@@ -1,4 +1,3 @@
-// src/pages/Dashboard.jsx
 import React, { useState, useEffect } from 'react';
 import SearchBar from '../components/SearchBar';
 import JobFilters from '../components/Job/JobFilters';
@@ -11,11 +10,20 @@ const Dashboard = () => {
 
   useEffect(() => {
     // Fetch jobs from the backend
-    fetch('/api/jobs')
-      .then(response => response.json())
+    fetch('http://localhost:4000/jobs')
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
       .then(data => {
+        console.log('Fetched jobs:', data);  // Debug: log fetched jobs
         setJobs(data);
         setFilteredJobs(data);
+      })
+      .catch(error => {
+        console.error('Error fetching jobs:', error);
       });
   }, []);
 
@@ -35,6 +43,11 @@ const Dashboard = () => {
     }
     setFilteredJobs(filtered);
   };
+
+  // Debug: log the filtered jobs state
+  useEffect(() => {
+    console.log('Filtered jobs:', filteredJobs);
+  }, [filteredJobs]);
 
   return (
     <div className="dashboard">

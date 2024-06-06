@@ -53,7 +53,7 @@ const getJob = async (req, res) => {
 const getAllJobs = async (req, res) => {
     try {
         const query = 
-        `SELECT jobs.title, users.name AS company_name, jobs.position, jobs.field, jobs.job_type
+        `SELECT jobs.title, users.name AS company_name, jobs.location, jobs.position, jobs.field, jobs.job_type
         FROM jobs JOIN users ON jobs.company_id = users.id`;
 
         const { rows } = await db.query(query);

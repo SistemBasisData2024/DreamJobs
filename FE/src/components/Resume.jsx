@@ -64,7 +64,11 @@ const Resume = ({ user_id, resumeId }) => {
     };
 
     useEffect(() => {
-        fetchResume();
+        if (user_id) {
+            fetchResume();
+        } else {
+            console.error('user_id is undefined or null');
+        }
     }, [user_id]);
 
     return (
