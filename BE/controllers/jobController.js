@@ -12,13 +12,13 @@ const field = async (req, res) => {
 
 // Posting pekerjaan
 const addJob = async (req, res) => {
-    const { company_id } = req.params;
+    const { user_id } = req.params;
     const { job_type, field, title, position, description, location } = req.body;
 
     try {
         const result = await db.query(
-            `INSERT INTO jobs (company_id, job_type, field, title, position, description, location) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *`,
-            [company_id, job_type, field, title, position, description, location]
+            `INSERT INTO jobs (user_id, job_type, field, title, position, description, location) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *`,
+            [user_id, job_type, field, title, position, description, location]
         );
 
         const newJob = result.rows[0];
@@ -53,8 +53,8 @@ const getJob = async (req, res) => {
 const getAllJobs = async (req, res) => {
     try {
         const query = 
-        `SELECT jobs.title, users.name AS company_name, jobs.position, jobs.field, jobs.job_type
-        FROM jobs JOIN users ON jobs.company_id = users.id`;
+        `SELECT jobs.title, users.name AS company_name, jobs.position, jobs.field, jobs.location, jobs.job_type
+        FROM jobs JOIN users ON jobs.user_id = users.id`;
 
         const { rows } = await db.query(query);
 
@@ -68,17 +68,17 @@ const getAllJobs = async (req, res) => {
         res.status(500).json({ error: 'Internal Server Error' });
     }
 }
-
+ 
 // Di beranda secara otomatis menampilkan semua job yang telah diposting -> di sisi company
 const getAllPosts = async (req, res) => {
-    const { company_id } =req.params;
+    const { user_id } =req.params;
 
     try {
         const query = 
         `SELECT jobs.title, jobs.position, jobs.field, jobs.job_type
-        FROM jobs WHERE company_id = $1`;
+        FROM jobs WHERE user_id = $1`;
 
-        const { rows } = await db.query(query, [company_id]);
+        const { rows } = await db.query(query, [user_id]);
 
         if (rows.length === 0) {
             return res.status(404).json({ error: 'No Job Vacancies Posted' });
@@ -97,8 +97,8 @@ const searchJobs = async (req, res) => {
 
     try {
         const query = 
-        `SELECT jobs.title, users.name AS company_name, jobs.position, jobs.field, jobs.job_type
-        FROM jobs JOIN users ON jobs.company_id = users.id
+        `SELECT jobs.title, users.name AS company_name, jobs.position, jobs.location, jobs.field, jobs.job_type
+        FROM jobs JOIN users ON jobs.user_id = users.id
         WHERE title ILIKE $1
         OR description ILIKE $1`;
 
@@ -121,8 +121,8 @@ const getJobsByType = async (req, res) => {
 
     try {
         const query = 
-            `SELECT jobs.title, users.name AS company_name, jobs.position, jobs.field, jobs.job_type
-             FROM jobs JOIN users ON jobs.company_id = users.id
+            `SELECT jobs.title, users.name AS company_name, jobs.position, jobs.field, jobs.location, jobs.job_type
+             FROM jobs JOIN users ON jobs.user_id = users.id
              WHERE jobs.job_type = $1`;
 
         const { rows } = await db.query(query, [job_type]);
@@ -144,8 +144,8 @@ const getJobsByField = async (req, res) => {
 
     try {
         const query = 
-            `SELECT jobs.title, users.name AS company_name, jobs.position, jobs.field, jobs.job_type
-             FROM jobs JOIN users ON jobs.company_id = users.id
+            `SELECT jobs.title, users.name AS company_name, jobs.position, jobs.field, jobs.location, jobs.job_type
+             FROM jobs JOIN users ON jobs.user_id = users.id
              WHERE jobs.field = $1`;
 
         const { rows } = await db.query(query, [field]);
@@ -167,8 +167,8 @@ const getJobsByLocation = async (req, res) => {
 
     try {
         const query = 
-            `SELECT jobs.title, users.name AS company_name, jobs.position, jobs.field, jobs.job_type
-             FROM jobs JOIN users ON jobs.company_id = users.id
+            `SELECT jobs.title, users.name AS company_name, jobs.position, jobs.field, jobs.location, jobs.job_type
+             FROM jobs JOIN users ON jobs.user_id = users.id
              WHERE jobs.location = $1`;
 
         const { rows } = await db.query(query, [location]);
