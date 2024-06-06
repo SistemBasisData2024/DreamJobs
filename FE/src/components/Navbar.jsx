@@ -13,6 +13,10 @@ const Navbar = () => {
         localStorage.removeItem('user');
     };
 
+    const toggleDropdown = () => {
+        setDropdownVisible(!isDropdownVisible);
+    };
+
     return (
         <header>
             <nav className="navbar">
@@ -29,20 +33,26 @@ const Navbar = () => {
                                 </Link>
                             </li>
                             <li className="navbar-menu-item">
-                                <img
-                                    src={user.profileImageUrl}
-                                    alt="Profile"
-                                    className="navbar-profile-image"
-                                    onClick={() => setDropdownVisible(!isDropdownVisible)}
-                                />
-                                {isDropdownVisible && (
-                                    <ul className="navbar-dropdown">
-                                        <li><Link to="/profile">Profile</Link></li>
-                                        {user.role === 'Job Seeker' && <li><Link to="/add-resume">Add Resume</Link></li>}
-                                        {user.role === 'Company' && <li><Link to="/post-job">Post Job</Link></li>}
-                                        <li onClick={handleLogout}><Link to="/login">Logout</Link></li>
-                                    </ul>
-                                )}
+                                <div className="navbar-dropdown-container" onClick={toggleDropdown}>
+                                    <img
+                                        src={user.profileImageUrl}
+                                        alt="Profile"
+                                        className="navbar-profile-image"
+                                    />
+                                    {isDropdownVisible && (
+                                        <ul className="navbar-dropdown">
+                                            <li><Link to="/profile">Profile</Link></li>
+                                            {user.role === 'Job Seeker' && <li><Link to="/add-resume">Add Resume</Link></li>}
+                                            {user.role === 'Company' && (
+                                                <>
+                                                    <li><Link to="/post-job">Post Job</Link></li>
+                                                    <li><Link to="/companyDetail">Detail Company</Link></li>
+                                                </>
+                                            )}
+                                            <li onClick={handleLogout}><Link to="/login">Logout</Link></li>
+                                        </ul>
+                                    )}
+                                </div>
                             </li>
                         </>
                     )}

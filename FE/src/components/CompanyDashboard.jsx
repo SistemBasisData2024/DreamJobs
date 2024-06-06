@@ -2,11 +2,13 @@ import React, { useContext, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { UserContext } from '../UserContexts';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import '../styles/CompanyDashboard.css';
 
 const CompanyDashboard = () => {
-  const { user } = useContext(UserContext); // Extract user from context
+  const { user } = useContext(UserContext);
   const [jobs, setJobs] = useState([]);
+  const navigate = useNavigate(); // Initialize useNavigate
 
   useEffect(() => {
     const fetchJobs = async (user_id) => {
@@ -19,9 +21,14 @@ const CompanyDashboard = () => {
     };
 
     if (user && user.id) {
-      fetchJobs(user.id); // Pass user_id to fetchJobs function
+      fetchJobs(user.id);
     }
   }, [user]);
+
+  // Event handler for showing applicants
+  const handleShowApplicants = (jobId) => {
+    navigate(`/applications/${jobId}`); // Navigate to Application.jsx
+  };
 
   return (
     <div>
@@ -32,9 +39,13 @@ const CompanyDashboard = () => {
             <p><strong>Position:</strong> {job.position}</p>
             <p><strong>Field:</strong> {job.field}</p>
             <p><strong>Job Type:</strong> {job.job_type}</p>
-            <Link to="#" className="show-applicants-button">
+            {/* Add onClick event handler to call handleShowApplicants */}
+            <button 
+              className="show-applicants-button" 
+              onClick={() => handleShowApplicants(job.id)}
+            >
               Show Applicants
-            </Link>
+            </button>
           </div>
         ))}
       </div>

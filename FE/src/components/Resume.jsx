@@ -77,11 +77,13 @@ const Resume = () => {
             {resume ? (
                 <div className="resume-header">
                     <h1>{resume.name}</h1>
-                    <p>{resume.description}</p>
-                    <p>{resume.education}</p>
-                    <p>{resume.experience}</p>
-                    <p>{resume.skill}</p>
-                    <p>{resume.achievement}</p>
+                    <div className="resume-details">
+                        <p><strong>Description:</strong> {resume.description}</p>
+                        <p><strong>Education:</strong> {resume.education}</p>
+                        <p><strong>Experience:</strong> {resume.experience}</p>
+                        <p><strong>Skill:</strong> {resume.skill}</p>
+                        <p><strong>Achievement:</strong> {resume.achievement}</p>
+                    </div>
                     <button className="resume-edit-button" onClick={() => setIsEditMode(true)}>Edit Resume</button>
                 </div>
             ) : (
@@ -174,6 +176,7 @@ const Resume = () => {
             )}
         </div>
     );
+    
 };
 
 export default Resume;

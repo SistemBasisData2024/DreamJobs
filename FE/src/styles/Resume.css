@@ -1,37 +1,49 @@
-/* Resume.css */
-
 .resume-container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 20px;
+    padding: 30px;
     background-color: #f9f9f9;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    max-width: 600px;
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
+    max-width: 700px;
     margin: auto;
+    transition: box-shadow 0.3s ease;
+}
+
+.resume-container:hover {
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.2);
 }
 
 .resume-header {
-    text-align: center;
-    margin-bottom: 20px;
+    text-align: left; /* Align text to the left */
+    width: 100%; /* Ensure full width */
+    margin-bottom: 25px;
 }
 
 .resume-header h1 {
-    font-size: 2em;
-    margin-bottom: 10px;
+    font-size: 2.5em;
+    margin-bottom: 15px;
     color: #333;
 }
 
 .resume-header p {
-    font-size: 1em;
-    color: #666;
+    font-size: 1.2em;
+    color: #555;
+    margin: 7px 0; /* Ensure consistent margins */
+}
+
+.resume-details {
+    text-align: left; /* Align text to the left */
+    width: 100%; /* Ensure full width */
 }
 
 .resume-details p {
-    font-size: 1em;
+    font-size: 1.1em;
     color: #444;
-    margin: 5px 0;
+    margin: 7px 0; /* Ensure consistent margins */
+    padding-left: 15px; /* Add padding for tabulation */
+    text-indent: -15px; /* Indent text for a tab effect */
 }
 
 .resume-form {
@@ -42,22 +54,30 @@
 
 .resume-form input,
 .resume-form textarea {
-    font-size: 1em;
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+    font-size: 1.1em;
+    padding: 12px;
+    margin: 12px 0;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    transition: border-color 0.3s ease;
+}
+
+.resume-form input:focus,
+.resume-form textarea:focus {
+    border-color: #007bff;
+    outline: none;
 }
 
 .resume-form button {
-    font-size: 1em;
-    padding: 10px 20px;
-    margin-top: 10px;
+    font-size: 1.1em;
+    padding: 12px 25px;
+    margin-top: 15px;
     border: none;
-    border-radius: 4px;
-    background-color: #486079;
+    border-radius: 6px;
+    background-color: #007bff;
     color: white;
     cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
 .resume-form button:hover {
@@ -65,14 +85,15 @@
 }
 
 .resume-edit-button {
-    margin-top: 20px;
-    font-size: 1em;
-    padding: 10px 20px;
+    margin-top: 25px;
+    font-size: 1.1em;
+    padding: 12px 25px;
     border: none;
-    border-radius: 4px;
-    background-color: #28a745;
+    border-radius: 6px;
+    background-color: #41707b;
     color: white;
     cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
 .resume-edit-button:hover {

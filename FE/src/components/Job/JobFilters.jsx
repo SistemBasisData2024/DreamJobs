@@ -1,30 +1,48 @@
-// src/components/JobFilters.jsx
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 const JobFilters = ({ onFilter }) => {
+  const [jobTypes, setJobTypes] = useState([]);
+  const [fields, setFields] = useState([]);
+  const [locations, setLocations] = useState([]);
+
+  useEffect(() => {
+    fetch('http://localhost:4000/jobs/jobType')
+      .then(response => response.json())
+      .then(data => setJobTypes(data))
+      .catch(error => console.error('Error fetching job types:', error));
+
+    fetch('http://localhost:4000/jobs/field')
+      .then(response => response.json())
+      .then(data => setFields(data))
+      .catch(error => console.error('Error fetching fields:', error));
+
+    // Assuming you have a similar endpoint for locations
+    // fetch('http://localhost:4000/api/locations')
+    //   .then(response => response.json())
+    //   .then(data => setLocations(data))
+    //   .catch(error => console.error('Error fetching locations:', error));
+  }, []);
+
   return (
     <div className="job-filters">
       <select onChange={(e) => onFilter('type', e.target.value)}>
-        <option value="">Filter by Type</option>
-        <option value="">Full Time</option>
-        <option value="Part Time">Part Time</option>
-        <option value="Contract">Contract</option>
-        <option value="Internship">Internship</option>
-        <option value="Freelance">Freelance</option>
+        <option value="">All Types</option>
+        {jobTypes.map((type) => (
+          <option key={type} value={type}>{type}</option>
+        ))}
       </select>
       <select onChange={(e) => onFilter('field', e.target.value)}>
-        <option value="">Filter by Field</option>
-        <option value="Technology">Technology</option>
-        <option value="Finance">Finance</option>
-        <option value="Healthcare">Healthcare</option>
-        <option value="Education">Education</option>
-        <option value="Marketing">Marketing</option>
-        <option value="Sales">Sales</option>
+        <option value="">All Fields</option>
+        {fields.map((field) => (
+          <option key={field} value={field}>{field}</option>
+        ))}
       </select>
-      <select onChange={(e) => onFilter('location', e.target.value)}>
-        <option value="">Filter by Location</option>
-        {/* Add more locations as needed */}
-      </select>
+      {/* <select onChange={(e) => onFilter('location', e.target.value)}>
+        <option value="">All Locations</option>
+        {locations.map((location) => (
+          <option key={location} value={location}>{location}</option>
+        ))}
+      </select> */}
     </div>
   );
 };
