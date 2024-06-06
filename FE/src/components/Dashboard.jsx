@@ -1,4 +1,3 @@
-// src/pages/Dashboard.jsx
 import React, { useState, useEffect } from 'react';
 import SearchBar from '../components/SearchBar';
 import JobFilters from '../components/Job/JobFilters';
@@ -10,30 +9,64 @@ const Dashboard = () => {
   const [filteredJobs, setFilteredJobs] = useState([]);
 
   useEffect(() => {
-    // Fetch jobs from the backend
-    fetch('/api/jobs')
-      .then(response => response.json())
+    // Fetch all jobs from the backend
+    fetch('http://localhost:4000/jobs')
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
       .then(data => {
         setJobs(data);
         setFilteredJobs(data);
+      })
+      .catch(error => {
+        console.error('Error fetching jobs:', error);
       });
   }, []);
 
   const handleSearch = (term) => {
-    const filtered = jobs.filter(job => job.title.includes(term) || job.description.includes(term));
-    setFilteredJobs(filtered);
+    fetch(`http://localhost:4000/jobs/search/${term}`)
+      .then(response => response.json())
+      .then(data => {
+        if (data.error) {
+          setFilteredJobs([]);
+        } else {
+          setFilteredJobs(data);
+        }
+      })
+      .catch(error => {
+        console.error('Error searching jobs:', error);
+      });
   };
 
   const handleFilter = (type, value) => {
-    let filtered = jobs;
-    if (type === 'type') {
-      filtered = jobs.filter(job => job.job_type === value);
-    } else if (type === 'field') {
-      filtered = jobs.filter(job => job.field === value);
-    } else if (type === 'location') {
-      filtered = jobs.filter(job => job.location === value);
+    let url = `http://localhost:4000/jobs`;
+    if (type === 'type' && value) {
+      url = `http://localhost:4000/jobs/type/${value}`;
+    } else if (type === 'field' && value) {
+      url = `http://localhost:4000/jobs/field/${value}`;
+    } 
+    // else if (type === 'location') {
+    //   url = `http://localhost:4000/jobs/location/${value}`;
+    // }
+    if (value === '') {
+      url = 'http://localhost:4000/jobs';
     }
-    setFilteredJobs(filtered);
+
+    fetch(url)
+      .then(response => response.json())
+      .then(data => {
+        if (data.error) {
+          setFilteredJobs([]);
+        } else {
+          setFilteredJobs(data);
+        }
+      })
+      .catch(error => {
+        console.error(`Error fetching jobs by ${type}:`, error);
+      });
   };
 
   return (
