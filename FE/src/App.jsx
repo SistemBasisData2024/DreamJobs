@@ -9,7 +9,10 @@ import Navbar from './components/Navbar';
 import UserContext from './UserContext';
 import Dashboard from './components/Dashboard';
 import CompanyDashboard from './components/CompanyDashboard';
+<<<<<<< HEAD
 import Resume from './components/Resume';
+=======
+>>>>>>> 411fc8f9113e4135f67d8f1f4ce9f0f3e6449be8
 
 const App = () => {
   const [user, setUser] = useState(null);
@@ -25,7 +28,10 @@ const App = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/logout" element={<Logout />} />
+<<<<<<< HEAD
           <Route path="/add-resume" element={<Resume />} />
+=======
+>>>>>>> 411fc8f9113e4135f67d8f1f4ce9f0f3e6449be8
           <Route path="/dashboard" element={user ? (user.role === 'Company' ? <CompanyDashboard /> : <Dashboard />) : <Navigate to="/login" replace />} />
         </Routes>
       </Router>
