@@ -46,15 +46,15 @@ CREATE TABLE company (
 ### Tabel Jobs
 
 ```sql
-CREATE TYPE job_type_enum AS ENUM ('full_time', 'part_time', 'contract', 'internship', 'freelance');
+CREATE TYPE job_type_enum AS ENUM ('Full Time', 'Part Time', 'Contract', 'Internship', 'Freelance');
 ```
 ```sql
-CREATE TYPE field_enum AS ENUM ('technology', 'finance', 'healthcare', 'education', 'marketing', 'sales');
+CREATE TYPE field_enum AS ENUM ('Technology', 'Finance', 'Healthcare', 'Education', 'Marketing', 'Sales');
 ```
 ```sql
 CREATE TABLE jobs (
     id SERIAL PRIMARY KEY,
-    company_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+    user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
     job_type job_type_enum NOT NULL,
     field field_enum NOT NULL,
     title VARCHAR(255) NOT NULL,
