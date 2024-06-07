@@ -1,31 +1,35 @@
-.login-form {
+/* General Form Styles */
+.form-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     height: 100vh;
     background: linear-gradient(to bottom right, #f0f0f0, #b0c4de);
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.login-form input {
+.form-container input, .form-container select {
     margin: 10px 0;
-    padding: 8px;
+    padding: 10px;
     border-radius: 5px;
     border: 1px solid #ccc;
-    width: 300px;
+    width: 100%;
+    max-width: 300px;
+    box-sizing: border-box;
 }
 
 .password-container {
     position: relative;
-    width: 300px;
+    width: 100%;
+    max-width: 300px;
     margin: 10px 0;
 }
 
 .password-container input {
     width: 100%;
     padding-right: 2.5rem;
-    border-radius: 5px;
-    border: 1px solid #ccc;
 }
 
 .eye-icon {
@@ -36,7 +40,7 @@
     cursor: pointer;
 }
 
-.login-form button {
+.form-container button {
     margin-top: 20px;
     padding: 10px 20px;
     border-radius: 5px;
@@ -46,8 +50,8 @@
     cursor: pointer;
 }
 
-.login-form button:hover {
-    background-color: #0056b3;
+.form-container button:hover {
+    background-color: #121212;
 }
 
 .error {
@@ -59,5 +63,5 @@
     max-width: 50%;
     object-fit: cover;
     height: auto;
-    margin-left: 20px; /* Add margin-left for spacing */
+    margin-left: 20px;
 }

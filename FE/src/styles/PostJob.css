@@ -1,17 +1,20 @@
 .post-container {
     display: flex;
-    justify-content: center; /* Untuk memusatkan form jika perlu */
+    justify-content: center;
+    /* Untuk memusatkan form jika perlu */
 }
 
 .job-form {
     display: flex;
     flex-direction: column;
-    max-width: 600px; /* Atur lebar maksimum form sesuai kebutuhan */
+    max-width: 600px;
+    /* Atur lebar maksimum form sesuai kebutuhan */
     width: 100%;
 }
 
 .form-group {
-    margin-bottom: 1rem; /* Atur jarak antara setiap elemen form */
+    margin-bottom: 1rem;
+    /* Atur jarak antara setiap elemen form */
 }
 
 .label {
@@ -31,7 +34,7 @@ select {
 .button {
     padding: 0.5rem 1rem;
     font-size: 1rem;
-    background-color: #007bff;
+    background-color: #3f546b;
     color: #fff;
     border: none;
     cursor: pointer;
@@ -39,6 +42,5 @@ select {
 }
 
 button:hover {
-    background-color: #4d92db;
+    background-color: #090909;
 }
- 

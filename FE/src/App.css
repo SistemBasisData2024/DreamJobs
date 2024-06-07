@@ -1,0 +1,134 @@
+/* App.css */
+
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    color: #333;
+}
+
+/* Navbar styles */
+.navbar {
+    background-color: #35475a;
+    color: #fff;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar a {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 10px;
+    font-weight: bold;
+}
+
+.navbar a:hover {
+    text-decoration: underline;
+}
+
+/* Main content styles */
+.main-content {
+    padding: 2rem;
+}
+
+/* General form styles */
+form {
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    margin: 2rem auto;
+}
+
+form input, form select, form button {
+    width: 100%;
+    margin-bottom: 1rem;
+    padding: 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+form button {
+    background-color: #35475a;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+form button:hover {
+    background-color: #121212;
+}
+
+/* Flexbox utility classes */
+.flex {
+    display: flex;
+}
+
+.flex-center {
+    justify-content: center;
+    align-items: center;
+}
+
+.flex-column {
+    flex-direction: column;
+}
+
+/* Page specific styles */
+.home-page, .profile-page, .login-page, .signup-page, .dashboard-page, .company-dashboard-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - 70px); /* Adjust height considering the navbar */
+}
+
+.home-page {
+    background-color: #b0c4de;
+}
+
+.profile-page {
+    background-color: #f0f0f0;
+}
+
+.login-page, .signup-page {
+    background: linear-gradient(to bottom right, #f0f0f0, #b0c4de);
+}
+
+.dashboard-page, .company-dashboard-page {
+    background-color: #e0e0e0;
+}
+
+/* Error message styles */
+.error {
+    color: red;
+    margin-top: 10px;
+}
+
+/* Image styles */
+.pekerja-image {
+    max-width: 50%;
+    object-fit: cover;
+    height: auto;
+    margin-left: 20px; /* Add margin-left for spacing */
+}
+
+/* Password container styles */
+.password-container {
+    position: relative;
+    margin-bottom: 1rem;
+}
+
+.password-container input {
+    padding-right: 2.5rem;
+}
+
+.eye-icon {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+}

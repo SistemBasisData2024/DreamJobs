@@ -39,15 +39,12 @@ const CompanyDashboard = () => {
             <p><strong>Position:</strong> {job.position}</p>
             <p><strong>Field:</strong> {job.field}</p>
             <p><strong>Job Type:</strong> {job.job_type}</p>
-            {/* Add onClick event handler to call handleShowApplicants */}
-            <button 
-              className="show-applicants-button" 
-              onClick={() => handleShowApplicants(job.id)}
-            >
+            <Link to={`/applications/${job.id}`} className="show-applicants-button">
               Show Applicants
-            </button>
+            </Link>
           </div>
         ))}
+
       </div>
     </div>
   );

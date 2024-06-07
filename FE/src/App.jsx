@@ -13,7 +13,7 @@ import Resume from './components/Resume';
 import PostJob from './components/Job/PostJob';
 import Application from './components/Application'; // Import Application
 import Company from './components/Company'; // Import Company
-
+//import './App.css'
 const App = () => {
   return (
     <UserProvider>

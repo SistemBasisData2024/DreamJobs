@@ -64,7 +64,7 @@
 
 .resume-form input:focus,
 .resume-form textarea:focus {
-    border-color: #007bff;
+    border-color: #3b5673;
     outline: none;
 }
 
@@ -74,7 +74,7 @@
     margin-top: 15px;
     border: none;
     border-radius: 6px;
-    background-color: #007bff;
+    background-color: #384f67;
     color: white;
     cursor: pointer;
     transition: background-color 0.3s ease;
@@ -97,5 +97,5 @@
 }
 
 .resume-edit-button:hover {
-    background-color: #218838;
+    background-color: #060606;
 }

@@ -22,21 +22,21 @@ form input {
 form button {
     padding: 10px 20px;
     font-size: 16px;
-    background-color: #007BFF;
+    background-color: #3c526b;
     color: white;
     border: none;
     cursor: pointer;
 }
 
 form button:hover {
-    background-color: #0056b3;
+    background-color: #0f0f0f;
 }
 
 form button[type="button"] {
-    background-color: #6c757d;
+    background-color: #3c526b;
     margin-left: 10px;
 }
 
 form button[type="button"]:hover {
-    background-color: #5a6268;
+    background-color: #0f0f0f;
 }
