@@ -45,14 +45,15 @@ const getAllApplication = async (req, res) => {
 
     try {
         const query = `
-            SELECT  
+            SELECT 
+                jobs.id AS job_id,
                 jobs.title AS job_title, 
                 users.name AS company_name, 
                 applications.status
             FROM 
                 applications
                 JOIN jobs ON applications.job_id = jobs.id
-                JOIN users ON jobs.company_id = users.id
+                JOIN users ON jobs.user_id = users.id
             WHERE 
                 applications.user_id = $1
             ORDER BY 
