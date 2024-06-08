@@ -15,6 +15,7 @@ import Application from './components/Application'; // Import Application
 import Company from './components/Company'; // Import Company
 import JobDetail from './components/Job/JobDetail';
 import CompanyDetail from './components/CompanyDetail';
+import ApplicantList from './components/ApplicantList';
 
 const App = () => {
   return (
@@ -36,6 +37,7 @@ const App = () => {
           <Route path="/addCompanyDetail" element={<Company />} /> 
           <Route path="/jobDetail/:job_id" element={<JobDetail/>} />
           <Route path="/companyDetail/:company_id" element={<CompanyDetail/>} />
+          <Route path="/applicants/:job_id/:title" element={<ApplicantList/>} />
         </Routes>
       </Router>
     </UserProvider>

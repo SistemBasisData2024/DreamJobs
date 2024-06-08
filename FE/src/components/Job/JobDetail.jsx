@@ -23,8 +23,10 @@ const JobDetail = () => {
 
         const checkApplicationStatus = async () => {
             try {
-                const res = await axios.get(`http://localhost:4000/application/checkApplication/${job_id}/${user.id}`);
-                setHasApplied(res.data.applied);
+                if (user && user.id) {
+                    const res = await axios.get(`http://localhost:4000/application/checkApplication/${job_id}/${user.id}`);
+                    setHasApplied(res.data.applied);
+                }
             } catch (err) {
                 console.error('Error checking application status:', err);
             }
@@ -32,7 +34,7 @@ const JobDetail = () => {
 
         fetchJob();
         checkApplicationStatus();
-    }, [job_id, user.id]);
+    }, [job_id, user]);
 
     const handleApply = async () => {
         try {
