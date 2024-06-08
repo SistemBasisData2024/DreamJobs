@@ -23,8 +23,10 @@ const JobDetail = () => {
 
         const checkApplicationStatus = async () => {
             try {
-                const res = await axios.get(`http://localhost:4000/application/checkApplication/${job_id}/${user.id}`);
-                setHasApplied(res.data.applied);
+                if (user && user.id) {
+                    const res = await axios.get(`http://localhost:4000/application/checkApplication/${job_id}/${user.id}`);
+                    setHasApplied(res.data.applied);
+                }
             } catch (err) {
                 console.error('Error checking application status:', err);
             }
@@ -32,7 +34,7 @@ const JobDetail = () => {
 
         fetchJob();
         checkApplicationStatus();
-    }, [job_id, user.id]);
+    }, [job_id, user]);
 
     const handleApply = async () => {
         try {
@@ -43,6 +45,18 @@ const JobDetail = () => {
                 user_id: user.id,
                 status: 'Screening'
             });
+
+            // Simpan aplikasi ke localStorage atau context
+            const newApplication = {
+                job_id,
+                user_id: user.id,
+                status: 'Screening',
+                job_title: job.title,
+                company_name: job.company_name
+            };
+            const existingApplications = JSON.parse(localStorage.getItem('applications')) || [];
+            localStorage.setItem('applications', JSON.stringify([...existingApplications, newApplication]));
+
             setApplySuccess(true);
             setHasApplied(true);
             console.log('Application submitted:', response.data);

@@ -42,7 +42,12 @@ const Navbar = () => {
                                     {isDropdownVisible && (
                                         <ul className="navbar-dropdown">
                                             <li><Link to="/profile">Profile</Link></li>
-                                            {user.role === 'Job Seeker' && <li><Link to="/add-resume">Add Resume</Link></li>}
+                                            {user.role === 'Job Seeker' && (
+                                                <>
+                                                    <li><Link to="/add-resume">Add Resume</Link></li>
+                                                    <li><Link to="/view-applications">View Applications</Link></li>
+                                                </>
+                                            )}
                                             {user.role === 'Company' && (
                                                 <>
                                                     <li><Link to="/post-job">Post Job</Link></li>

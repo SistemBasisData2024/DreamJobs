@@ -1,0 +1,32 @@
+.view-applications-container {
+    padding: 20px;
+    max-width: 600px;
+    margin: 0 auto;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+.view-applications-container h1 {
+    text-align: center;
+    font-weight: bold;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.application-item {
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.application-link {
+    font-size: 18px;
+    text-decoration: none;
+    color: #007bff;
+}
+
+.application-link:hover {
+    text-decoration: underline;
+}

@@ -11,10 +11,11 @@ import Dashboard from './components/Dashboard';
 import CompanyDashboard from './components/CompanyDashboard';
 import Resume from './components/Resume';
 import PostJob from './components/Job/PostJob';
-import Application from './components/Application'; // Import Application
-import Company from './components/Company'; // Import Company
+import Application from './components/Application';
+import Company from './components/Company'; 
 import JobDetail from './components/Job/JobDetail';
 import CompanyDetail from './components/CompanyDetail';
+import ViewApplications from './components/ViewApplications'; 
 
 const App = () => {
   return (
@@ -36,6 +37,7 @@ const App = () => {
           <Route path="/addCompanyDetail" element={<Company />} /> 
           <Route path="/jobDetail/:job_id" element={<JobDetail/>} />
           <Route path="/companyDetail/:company_id" element={<CompanyDetail/>} />
+          <Route path="/view-applications" element={<ViewApplications />} /> {/* Add ViewApplications route */}
         </Routes>
       </Router>
     </UserProvider>
