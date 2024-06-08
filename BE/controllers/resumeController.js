@@ -19,6 +19,25 @@ const addResume = async (req, res) => {
     }
 }
 
+const checkResume = async (req, res) => {
+    const { user_id } = req.params;
+
+    try {
+        // Query to check if the user has a resume
+        const query = `SELECT EXISTS (SELECT 1 FROM resume WHERE user_id = $1)`;
+        const { rows } = await db.query(query, [user_id]);
+
+        // Extract the boolean value from the result
+        const hasResume = rows[0].exists;
+
+        res.status(200).json({ hasResume });
+    } catch (error) {
+        console.error("Error: ", error);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+}
+
+
 const getResume = async (req, res) => {
     const { user_id } = req.params;
 
@@ -68,6 +87,7 @@ const updateResume = async (req, res) => {
 
 export default {
     addResume,
+    checkResume,
     getResume,
     updateResume
 };
