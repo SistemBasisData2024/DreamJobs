@@ -38,6 +38,7 @@ CREATE TABLE resume (
 CREATE TABLE company (
     id SERIAL PRIMARY KEY,
     user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+    name TEXT,
     description TEXT,
     address TEXT,
     contact TEXT
