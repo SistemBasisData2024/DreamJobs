@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import '../styles/ViewApplications.css';
 
 const ViewApplications = () => {
-    const { user } = useContext(UserContext);
+    const { user, setUser } = useContext(UserContext);
     const [applications, setApplications] = useState([]);
 
     useEffect(() => {
@@ -21,6 +21,24 @@ const ViewApplications = () => {
         if (user && user.id) {
             fetchApplications();
         }
+    }, [user]);
+
+    // Listener untuk perubahan status pengguna
+    useEffect(() => {
+        const handleUserChange = () => {
+            // Membersihkan data lamaran jika pengguna dihapus atau keluar
+            if (!user) {
+                localStorage.removeItem('applications');
+                setApplications([]);
+            }
+        };
+
+        const userChangeObserver = new MutationObserver(handleUserChange);
+        userChangeObserver.observe(document.getElementById('root'), { childList: true, subtree: true });
+
+        return () => {
+            userChangeObserver.disconnect();
+        };
     }, [user]);
 
     if (!applications.length) return <div>No applications found.</div>;
