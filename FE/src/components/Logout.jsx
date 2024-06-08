@@ -9,7 +9,7 @@ const Logout = () => {
         localStorage.removeItem('user');
 
         // Redirect to login page
-        navigate('/login'); // Change history.push to navigate
+        navigate('/login');
     }, [navigate]);
 
     return null;

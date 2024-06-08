@@ -7,6 +7,7 @@ const router = express.Router();
    atau untuk menampilkan dropdown saat filtering */
 router.get("/jobType", jobController.jobType);
 router.get("/field", jobController.field);
+router.get("/location", jobController.location);
 
 // Posting pekerjaan dan mendapatkan detail pekerjaan
 router.post("/:user_id", jobController.addJob);

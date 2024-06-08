@@ -2,13 +2,13 @@ import db from '../config/db.js';
 
 const addDetail = async (req, res) => {
     const { user_id } = req.params;
-    const { description, address, contact } = req.body;
+    const { name, description, address, contact } = req.body;
 
     try {
         // Insert the company into the database
         const result = await db.query(
-            `INSERT INTO company (user_id, description, address, contact) VALUES ($1, $2, $3, $4) RETURNING *`,
-            [user_id, description, address, contact]
+            `INSERT INTO company (user_id, name, description, address, contact) VALUES ($1, $2, $3, $4, $5) RETURNING *`,
+            [user_id, name, description, address, contact]
         );
 
         const newDetail = result.rows[0];
@@ -40,13 +40,13 @@ const getDetail = async (req, res) => {
 
 const updateDetail = async (req, res) => {
     const { id } = req.params;
-    const { description, address, contact } = req.body;
+    const { description, address, contact, name } = req.body;
 
     try {
         // Update company's attribute(s)
         const result = await db.query(
-            `UPDATE company SET description=$1, address=$2, contact=$3 WHERE id=$4 RETURNING *`,
-            [description, address, contact, id]
+            `UPDATE company SET description=$1, address=$2, contact=$3, name=$4 WHERE id=$5 RETURNING *`,
+            [description, address, contact, name, id]
         );
 
         if (result.rows.length === 0) {

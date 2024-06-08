@@ -6,6 +6,7 @@ import '../styles/Company.css';
 const Company = () => {
     const { user } = useContext(UserContext);
     const [formData, setFormData] = useState({
+        name: '',
         description: '',
         address: '',
         contact: ''
@@ -31,6 +32,7 @@ const Company = () => {
             if (response.data) {
                 setCompanyDetail(response.data);
                 setFormData({
+                    name: response.data.name,
                     description: response.data.description,
                     address: response.data.address,
                     contact: response.data.contact
@@ -71,82 +73,95 @@ const Company = () => {
             fetchCompanyDetail();
         }
     }, [user]);
-
+ 
     return (
-        <div>
-            <h1>Company Details</h1>
-
-            {companyDetail ? (
-                <div>
-                    <h2>Company Information</h2>
-                    {!isEditMode ? (
-                        <div>
-                            <p><strong>Description:</strong> {companyDetail.description}</p>
-                            <p><strong>Address:</strong> {companyDetail.address}</p>
-                            <p><strong>Contact:</strong> {companyDetail.contact}</p>
-                            <button onClick={() => setIsEditMode(true)}>Edit Details</button>
-                        </div>
-                    ) : (
-                        <form onSubmit={handleUpdateSubmit}>
-                            <textarea
-                                name="description"
-                                value={formData.description}
-                                onChange={handleChange}
-                                placeholder="Description"
-                                required
-                            />
-                            <input
-                                type="text"
-                                name="address"
-                                value={formData.address}
-                                onChange={handleChange}
-                                placeholder="Address"
-                                required
-                            />
-                            <input
-                                type="text"
-                                name="contact"
-                                value={formData.contact}
-                                onChange={handleChange}
-                                placeholder="Contact"
-                                required
-                            />
-                            <button type="submit">Update Details</button>
-                            <button type="button" onClick={() => setIsEditMode(false)}>Cancel</button>
-                        </form>
-                    )}
+        <div className="company-container">
+          <h1 className="title">Company Details</h1>
+          {companyDetail ? (
+            <div className="company-details">
+              {!isEditMode ? (
+                <div className="company-details-view">
+                  <p><strong>Name:</strong> {companyDetail.name}</p>
+                  <p><strong>Description:</strong> {companyDetail.description}</p>
+                  <p><strong>Address:</strong> {companyDetail.address}</p>
+                  <p><strong>Contact:</strong> {companyDetail.contact}</p>
+                  <button className="edit-button" onClick={() => setIsEditMode(true)}>Edit Details</button>
                 </div>
-            ) : (
-                <form onSubmit={handleAddSubmit}>
-                    <h2>Add Company Details</h2>
-                    <textarea
-                        name="description"
-                        value={formData.description}
-                        onChange={handleChange}
-                        placeholder="Description"
-                        required
-                    />
-                    <input
-                        type="text"
-                        name="address"
-                        value={formData.address}
-                        onChange={handleChange}
-                        placeholder="Address"
-                        required
-                    />
-                    <input
-                        type="text"
-                        name="contact"
-                        value={formData.contact}
-                        onChange={handleChange}
-                        placeholder="Contact"
-                        required
-                    />
-                    <button type="submit">Add Details</button>
+              ) : (
+                <form className="company-form" onSubmit={handleUpdateSubmit}>
+                  <textarea
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    placeholder="Name"
+                    required
+                  />
+                  <textarea
+                    name="description"
+                    value={formData.description}
+                    onChange={handleChange}
+                    placeholder="Description"
+                    required
+                  />
+                  <input
+                    type="text"
+                    name="address"
+                    value={formData.address}
+                    onChange={handleChange}
+                    placeholder="Address"
+                    required
+                  />
+                  <input
+                    type="text"
+                    name="contact"
+                    value={formData.contact}
+                    onChange={handleChange}
+                    placeholder="Contact"
+                    required
+                  />
+                  <button type="submit">Update Details</button>
+                  <button type="button" onClick={() => setIsEditMode(false)}>Cancel</button>
                 </form>
-            )}
+              )}
+            </div>
+          ) : (
+            <form className="company-form" onSubmit={handleAddSubmit}>
+              <h2>Add Company Details</h2>
+              <textarea
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                placeholder="Name"
+                required
+              />
+              <textarea
+                name="description"
+                value={formData.description}
+                onChange={handleChange}
+                placeholder="Description"
+                required
+              />
+              <input
+                type="text"
+                name="address"
+                value={formData.address}
+                onChange={handleChange}
+                placeholder="Address"
+                required
+              />
+              <input
+                type="text"
+                name="contact"
+                value={formData.contact}
+                onChange={handleChange}
+                placeholder="Contact"
+                required
+              />
+              <button type="submit">Add Details</button>
+            </form>
+          )}
         </div>
-    );
+      );
 };
 
 export default Company;

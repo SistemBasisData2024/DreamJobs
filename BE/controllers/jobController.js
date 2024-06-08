@@ -10,6 +10,46 @@ const field = async (req, res) => {
     res.json(fields);
 }
 
+const location = async (req, res) => {
+    const locations = [
+        "Aceh",
+        "Bali",
+        "Banten",
+        "Bengkulu",
+        "DI Yogyakarta",
+        "Jakarta",
+        "Gorontalo",
+        "Jambi",
+        "Jawa Barat",
+        "Jawa Tengah",
+        "Jawa Timur",
+        "Kalimantan Barat",
+        "Kalimantan Selatan",
+        "Kalimantan Tengah",
+        "Kalimantan Timur",
+        "Kalimantan Utara",
+        "Kepulauan Bangka Belitung",
+        "Kepulauan Riau",
+        "Lampung",
+        "Maluku",
+        "Maluku Utara",
+        "Nusa Tenggara Barat",
+        "Nusa Tenggara Timur",
+        "Papua",
+        "Papua Barat",
+        "Riau",
+        "Sulawesi Barat",
+        "Sulawesi Selatan",
+        "Sulawesi Tengah",
+        "Sulawesi Tenggara",
+        "Sulawesi Utara",
+        "Sumatera Barat",
+        "Sumatera Selatan",
+        "Sumatera Utara"
+    ];
+    res.json(locations);
+}
+
 // Posting pekerjaan
 const addJob = async (req, res) => {
     const { user_id } = req.params;
@@ -34,7 +74,13 @@ const getJob = async (req, res) => {
     const { id } = req.params;
 
     try {
-        const query = 'SELECT * FROM jobs WHERE id = $1';
+        const query = 
+            `SELECT jobs.*, company.name AS company_name
+             FROM jobs
+             JOIN company
+             ON jobs.user_id = company.user_id
+             WHERE jobs.id = $1;`;
+
         const { rows } = await db.query(query, [id]);
 
         if (rows.length === 0) {
@@ -53,7 +99,7 @@ const getJob = async (req, res) => {
 const getAllJobs = async (req, res) => {
     try {
         const query = 
-        `SELECT jobs.title, users.name AS company_name, jobs.position, jobs.field, jobs.location, jobs.job_type
+        `SELECT jobs.id, jobs.title, users.name AS company_name, jobs.position, jobs.field, jobs.location, jobs.job_type
         FROM jobs JOIN users ON jobs.user_id = users.id`;
 
         const { rows } = await db.query(query);
@@ -188,6 +234,7 @@ const getJobsByLocation = async (req, res) => {
 export default {
     jobType,
     field,
+    location,
     addJob,
     getJob,
     getAllJobs,

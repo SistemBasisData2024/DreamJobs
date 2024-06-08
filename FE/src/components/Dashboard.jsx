@@ -47,10 +47,9 @@ const Dashboard = () => {
       url = `http://localhost:4000/jobs/type/${value}`;
     } else if (type === 'field' && value) {
       url = `http://localhost:4000/jobs/field/${value}`;
-    } 
-    // else if (type === 'location') {
-    //   url = `http://localhost:4000/jobs/location/${value}`;
-    // }
+    } else if (type === 'location') {
+      url = `http://localhost:4000/jobs/location/${value}`;
+    }
     if (value === '') {
       url = 'http://localhost:4000/jobs';
     }
@@ -68,7 +67,7 @@ const Dashboard = () => {
         console.error(`Error fetching jobs by ${type}:`, error);
       });
   };
-
+ 
   return (
     <div className="dashboard">
       <SearchBar onSearch={handleSearch} />

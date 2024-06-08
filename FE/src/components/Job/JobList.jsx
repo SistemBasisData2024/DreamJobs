@@ -1,9 +1,7 @@
-// src/components/JobList.jsx
 import React from 'react';
 import { Link } from 'react-router-dom';
 
 const JobList = ({ jobs }) => (
-  
   <div className="job-list">
     {jobs.length > 0 ? (
       jobs.map(job => (
@@ -13,6 +11,7 @@ const JobList = ({ jobs }) => (
           <p><strong>Type:</strong> {job.job_type}</p>
           <p><strong>Field:</strong> {job.field}</p>
           <p><strong>Location:</strong> {job.location}</p>
+          <p style={{ color:'black'}}><Link to={`/jobDetail/${job.id}`}>Show Details</Link></p>
         </div>
       ))
     ) : (
@@ -20,6 +19,5 @@ const JobList = ({ jobs }) => (
     )}
   </div>
 );
-
 
 export default JobList;

@@ -13,7 +13,9 @@ import Resume from './components/Resume';
 import PostJob from './components/Job/PostJob';
 import Application from './components/Application'; // Import Application
 import Company from './components/Company'; // Import Company
-//import './App.css'
+import JobDetail from './components/Job/JobDetail';
+import CompanyDetail from './components/CompanyDetail';
+
 const App = () => {
   return (
     <UserProvider>
@@ -31,7 +33,9 @@ const App = () => {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/companyDashboard" element={<CompanyDashboard />} />
           <Route path="/applications" element={<Application />} />
-          <Route path="/companyDetail" element={<Company />} /> 
+          <Route path="/addCompanyDetail" element={<Company />} /> 
+          <Route path="/jobDetail/:job_id" element={<JobDetail/>} />
+          <Route path="/companyDetail/:company_id" element={<CompanyDetail/>} />
         </Routes>
       </Router>
     </UserProvider>

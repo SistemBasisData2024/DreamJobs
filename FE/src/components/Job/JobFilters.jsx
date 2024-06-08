@@ -16,11 +16,10 @@ const JobFilters = ({ onFilter }) => {
       .then(data => setFields(data))
       .catch(error => console.error('Error fetching fields:', error));
 
-    // Assuming you have a similar endpoint for locations
-    // fetch('http://localhost:4000/api/locations')
-    //   .then(response => response.json())
-    //   .then(data => setLocations(data))
-    //   .catch(error => console.error('Error fetching locations:', error));
+    fetch('http://localhost:4000/jobs/location')
+      .then(response => response.json())
+      .then(data => setLocations(data))
+      .catch(error => console.error('Error fetching locations:', error));
   }, []);
 
   return (
@@ -37,12 +36,12 @@ const JobFilters = ({ onFilter }) => {
           <option key={field} value={field}>{field}</option>
         ))}
       </select>
-      {/* <select onChange={(e) => onFilter('location', e.target.value)}>
+      <select onChange={(e) => onFilter('location', e.target.value)}>
         <option value="">All Locations</option>
         {locations.map((location) => (
           <option key={location} value={location}>{location}</option>
         ))}
-      </select> */}
+      </select>
     </div>
   );
 };

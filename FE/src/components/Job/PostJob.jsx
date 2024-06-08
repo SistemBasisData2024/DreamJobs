@@ -8,6 +8,8 @@ const PostJob = () => {
     const { user } = useContext(UserContext); // Mengambil user dari UserContext
     const [jobTypes, setJobTypes] = useState([]);
     const [fields, setFields] = useState([]);
+    const [locations, setLocations] = useState([]);
+
     const [formData, setFormData] = useState({
         job_type: '',
         field: '',
@@ -22,6 +24,7 @@ const PostJob = () => {
     useEffect(() => {
         fetchJobTypes();
         fetchFields();
+        fetchLocations();
     }, []);
 
     const fetchJobTypes = async () => {
@@ -41,6 +44,16 @@ const PostJob = () => {
         } catch (error) {
             console.error('Error fetching fields:', error);
             setError('Failed to fetch fields. Please try again.');
+        }
+    };
+
+    const fetchLocations = async () => {
+        try {
+            const response = await axios.get('http://localhost:4000/jobs/location');
+            setLocations(response.data);
+        } catch (error) {
+            console.error('Error fetching locations:', error);
+            setError('Failed to fetch locations. Please try again.');
         }
     };
 
@@ -139,13 +152,12 @@ const PostJob = () => {
                 <div className="form-group">
                     <label>
                         Location:
-                        <input
-                            type="text"
-                            name="location"
-                            value={formData.location}
-                            onChange={handleChange}
-                            required
-                        />
+                        <select name="location" value={formData.location} onChange={handleChange} required>
+                            <option value="">Select Location</option>
+                            {locations.map((location, index) => (
+                                <option key={index} value={location}>{location}</option>
+                            ))}
+                        </select>
                     </label>
                 </div>
                 <div className="form-group">

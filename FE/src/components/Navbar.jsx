@@ -46,7 +46,7 @@ const Navbar = () => {
                                             {user.role === 'Company' && (
                                                 <>
                                                     <li><Link to="/post-job">Post Job</Link></li>
-                                                    <li><Link to="/companyDetail">Detail Company</Link></li>
+                                                    <li><Link to="/addCompanyDetail">Detail Company</Link></li>
                                                 </>
                                             )}
                                             <li onClick={handleLogout}><Link to="/login">Logout</Link></li>
