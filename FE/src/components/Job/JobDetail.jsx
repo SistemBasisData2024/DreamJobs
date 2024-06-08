@@ -1,18 +1,55 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import axios from 'axios';
 import { Link, useParams } from 'react-router-dom';
+import { UserContext } from '../../UserContexts';
 
 const JobDetail = () => {
     const { job_id } = useParams();
     const [job, setJob] = useState(null);
+    const { user } = useContext(UserContext);
+    const [applyError, setApplyError] = useState(null);
+    const [applySuccess, setApplySuccess] = useState(false);
+    const [hasApplied, setHasApplied] = useState(false);
 
     useEffect(() => {
         const fetchJob = async () => {
-            const res = await axios.get(`http://localhost:4000/jobs/${job_id}`);
-            setJob(res.data);
+            try {
+                const res = await axios.get(`http://localhost:4000/jobs/${job_id}`);
+                setJob(res.data);
+            } catch (err) {
+                console.error('Error fetching job details:', err);
+            }
         };
+
+        const checkApplicationStatus = async () => {
+            try {
+                const res = await axios.get(`http://localhost:4000/application/checkApplication/${job_id}/${user.id}`);
+                setHasApplied(res.data.applied);
+            } catch (err) {
+                console.error('Error checking application status:', err);
+            }
+        };
+
         fetchJob();
-    }, [job_id]);
+        checkApplicationStatus();
+    }, [job_id, user.id]);
+
+    const handleApply = async () => {
+        try {
+            setApplyError(null);
+            setApplySuccess(false);
+            const response = await axios.post('http://localhost:4000/application', {
+                job_id,
+                user_id: user.id,
+                status: 'Screening'
+            });
+            setApplySuccess(true);
+            setHasApplied(true);
+            console.log('Application submitted:', response.data);
+        } catch (err) {
+            setApplyError(err.response ? err.response.data.error : 'Error submitting application');
+        }
+    };
 
     if (!job) return <div>Loading...</div>;
 
@@ -22,7 +59,8 @@ const JobDetail = () => {
             <h2 style={{ marginBottom: '20px', textAlign: 'center', fontSize: '15px' }}>
                 <Link to={`/companyDetail/${job.user_id}`} style={{ textDecoration: 'underline' }}>
                     {job.company_name}
-                </Link></h2>
+                </Link>
+            </h2>
             <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px' }}>
                 <p><strong>Type:</strong> {job.job_type}</p>
                 <p><strong>Field:</strong> {job.field}</p>
@@ -32,9 +70,26 @@ const JobDetail = () => {
                 <p><strong>Location:</strong> {job.location}</p>
             </div>
             <p style={{ marginBottom: '20px' }}>{job.description}</p>
-            <button style={{ display: 'block', width: '100%', padding: '10px', backgroundColor: '#007bff', color: '#fff', border: 'none', borderRadius: '5px', cursor: 'pointer' }}>
-                Apply
-            </button>
+            {applySuccess && <p style={{ color: 'green' }}>Application submitted successfully!</p>}
+            {applyError && <p style={{ color: 'red' }}>{applyError}</p>}
+            {!hasApplied && (
+                <button
+                    onClick={handleApply}
+                    style={{
+                        display: 'block',
+                        width: '100%',
+                        padding: '10px',
+                        backgroundColor: '#007bff',
+                        color: '#fff',
+                        border: 'none',
+                        borderRadius: '5px',
+                        cursor: 'pointer'
+                    }}
+                >
+                    Apply
+                </button>
+            )}
+            {hasApplied && <p style={{ color: 'blue', textAlign: 'center' }}>You have already applied for this job.</p>}
         </div>
     );
 };

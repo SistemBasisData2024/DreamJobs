@@ -22,6 +22,24 @@ const addApplication = async (req, res) => {
     }
 }
 
+const checkApplication = async (req, res) => {
+    const { job_id, user_id } = req.params;
+
+    try {
+        const query = 'SELECT * FROM applications WHERE job_id = $1 AND user_id = $2';
+        const { rows } = await db.query(query, [job_id, user_id]);
+
+        if (rows.length > 0) {
+            return res.status(200).json({ applied: true });
+        } else {
+            return res.status(200).json({ applied: false });
+        }
+    } catch (error) {
+        console.error('Error: ', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+};
+
 const getAllApplication = async (req, res) => {
     const { user_id } = req.params;
 
@@ -98,6 +116,7 @@ const getAllApplicant = async (req, res) => {
 export default {
     jobStatus,
     addApplication,
+    checkApplication,
     getAllApplication,
     updateStatus,
     getAllApplicant

@@ -9,6 +9,9 @@ router.get("", applicationController.jobStatus);
 // Untuk melamar ke perjaan tertentu
 router.post("", applicationController.addApplication);
 
+// Untuk cek apakah user sudah melamar ke suatu pekerjaan atau belum
+router.get("/checkApplication/:job_id/:user_id", applicationController.checkApplication);
+
 // Untuk melihat pekerjaan apa saja yang dilamar user -> di sisi job seeker
 router.get("/:user_id", applicationController.getAllApplication);
 
