@@ -42,7 +42,7 @@ const CompanyDashboard = () => {
               <p><strong>Position:</strong> {job.position}</p>
               <p><strong>Field:</strong> {job.field}</p>
               <p><strong>Job Type:</strong> {job.job_type}</p>
-              <button className="button"><Link to={`/`} >
+              <button className="button"><Link to={`/applicants/${job.id}/${job.title}`} >
                 Show Applicants
               </Link></button>
             </div>

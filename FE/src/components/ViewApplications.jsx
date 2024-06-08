@@ -27,7 +27,7 @@ const ViewApplications = () => {
 
     return (
         <div className="view-applications-container">
-            <h1>Your Applications</h1>
+            <h1>List of your applications</h1>
             <ul>
                 {applications.map((app) => (
                     <li key={app.job_id} className="application-item">

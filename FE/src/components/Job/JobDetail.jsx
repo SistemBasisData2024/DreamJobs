@@ -8,8 +8,8 @@ const JobDetail = () => {
     const [job, setJob] = useState(null);
     const { user } = useContext(UserContext);
     const [applyError, setApplyError] = useState(null);
-    const [applySuccess, setApplySuccess] = useState(false);
     const [hasApplied, setHasApplied] = useState(false);
+    const [hasResume, setHasResume] = useState(false); 
 
     useEffect(() => {
         const fetchJob = async () => {
@@ -32,14 +32,25 @@ const JobDetail = () => {
             }
         };
 
+        const checkResumeExists = async () => {
+            try {
+                const res = await axios.get(`http://localhost:4000/resume/checkResume/${user.id}`);
+                setHasResume(res.data.hasResume);
+            } catch (err) {
+                console.error('Error checking resume existence:', err);
+            }
+        };
+
         fetchJob();
         checkApplicationStatus();
+        if (user && user.id) {
+            checkResumeExists();
+        }
     }, [job_id, user]);
 
     const handleApply = async () => {
         try {
             setApplyError(null);
-            setApplySuccess(false);
             const response = await axios.post('http://localhost:4000/application', {
                 job_id,
                 user_id: user.id,
@@ -58,8 +69,9 @@ const JobDetail = () => {
             localStorage.setItem('applications', JSON.stringify([...existingApplications, newApplication]));
 
             setApplySuccess(true);
+
             setHasApplied(true);
-            console.log('Application submitted:', response.data);
+            alert('Application submitted successfully!');
         } catch (err) {
             setApplyError(err.response ? err.response.data.error : 'Error submitting application');
         }
@@ -84,9 +96,8 @@ const JobDetail = () => {
                 <p><strong>Location:</strong> {job.location}</p>
             </div>
             <p style={{ marginBottom: '20px' }}>{job.description}</p>
-            {applySuccess && <p style={{ color: 'green' }}>Application submitted successfully!</p>}
             {applyError && <p style={{ color: 'red' }}>{applyError}</p>}
-            {!hasApplied && (
+            {!hasApplied && hasResume && ( // Only show the Apply button if user has a resume
                 <button
                     onClick={handleApply}
                     style={{
@@ -103,7 +114,11 @@ const JobDetail = () => {
                     Apply
                 </button>
             )}
-            {hasApplied && <p style={{ color: 'blue', textAlign: 'center' }}>You have already applied for this job.</p>}
+            {!hasApplied && !hasResume && ( // Show message if user does not have a resume
+                <p style={{ color: 'red', textAlign: 'center' }}>You need to create a resume before applying.</p>
+            )} 
+            {hasApplied && <p style={ // Show message if user successfully applies for a job
+                { color: 'blue', textAlign: 'center' }}>You have already applied for this job.</p>}
         </div>
     );
 };
