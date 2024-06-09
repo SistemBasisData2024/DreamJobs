@@ -96,6 +96,8 @@ const getAllApplicant = async (req, res) => {
     try {
         const query = 
             `SELECT 
+                applications.id,
+                resume.user_id AS user_id,
                 resume.name AS applicant_name,
                 applications.status
             FROM 

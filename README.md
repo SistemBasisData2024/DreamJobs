@@ -50,7 +50,7 @@ CREATE TABLE company (
 CREATE TYPE job_type_enum AS ENUM ('Full Time', 'Part Time', 'Contract', 'Internship', 'Freelance');
 ```
 ```sql
-CREATE TYPE field_enum AS ENUM ('Technology', 'Finance', 'Healthcare', 'Education', 'Marketing', 'Sales');
+CREATE TYPE field_enum AS ENUM ('Technology', 'Finance', 'Healthcare', 'Education', 'Marketing');
 ```
 ```sql
 CREATE TABLE jobs (
@@ -82,5 +82,15 @@ CREATE TABLE applications (
 # Entity Relationship Diagram (ERD)
 ![Dreamjobs_ERD](https://github.com/SistemBasisData2024/DreamJobs/blob/17fc57318490475b1e1178fea852f2ba6bf80b1a/Dreamjobs_ERD.jpg)
 # Flowchart
+![Dreamjobs_Flowchart](https://github.com/SistemBasisData2024/DreamJobs/blob/038efdc5001aa1d10ffcc0518fb031a607b964a3/Dreamjobs_Flowchart.png)
+# UML Diagram
+![Dreajobs_UML](https://github.com/SistemBasisData2024/DreamJobs/blob/038efdc5001aa1d10ffcc0518fb031a607b964a3/Dreamjobs_UML.png)
 
-![Dreamjobs_Flowchart](https://github.com/SistemBasisData2024/DreamJobs/assets/120215928/eef63ff7-ef0e-4938-b70c-800442675f1c)
+# Progress Report
+### Pertemuan Pertama  : (31 May 2024)
+![Screenshot 2024-05-31 202045](https://github.com/SistemBasisData2024/DreamJobs/assets/120215928/114336ba-fadb-4f96-aa80-28682324f6b8)
+
+### Pertemuan Kedua    : (08 June 2024)
+![Screenshot 2024-06-08 211407](https://github.com/SistemBasisData2024/DreamJobs/assets/120215928/472dca89-4768-4bf7-b581-9af9601eea7c)
+
+
