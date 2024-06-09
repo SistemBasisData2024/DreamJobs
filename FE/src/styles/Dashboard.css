@@ -178,6 +178,7 @@ body {
 .nomad {
   position: relative;
   line-height: 160%;
+  font-style: none;
 }
 .company-name-location-job-child {
   width: 4px;

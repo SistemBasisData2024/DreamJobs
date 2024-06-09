@@ -38,6 +38,11 @@ const Navbar = () => {
                     {user ? (
                         <li className="navbar-menu-item" ref={dropdownRef}>
                             <Link to={user.role === 'Job Seeker' ? "/dashboard" : "/companyDashboard"}>Dashboard</Link>
+                            {user && user.role === 'Company' && (
+                        <li className="navbar-menu-item">
+                            <Link to="/post-job" className="navbar-link">Post Job</Link>
+                        </li>
+                    )}
                             <img
                                 src={user.profileImageUrl}
                                 alt="Profile"
@@ -48,7 +53,6 @@ const Navbar = () => {
                                 <ul className="navbar-dropdown">
                                     <li><Link to="/profile">Profile</Link></li>
                                     {user.role === 'Job Seeker' && <li><Link to="/add-resume">Add Resume</Link></li>}
-                                    {user.role === 'Company' && <li><Link to="/post-job">Post Job</Link></li>}
                                     <li onClick={handleLogout}><Link to="/login">Logout</Link></li>
                                 </ul>
                             )}
@@ -58,7 +62,7 @@ const Navbar = () => {
                             <li className="navbar-menu-item">
                                 <Link to="/login" className="navbar-link">Login</Link>
                             </li>
-                            <li className="navbar-menu-item">
+                            <li className="navbar-menu-item signup">
                                 <Link to="/signup" className="navbar-link">Signup</Link>
                             </li>
                         </>

@@ -4,15 +4,17 @@
     align-items: center;
     padding: 1em;
     background-color: #f8f8f8;
-    position: relative; /* Add this to make the dropdown position relative to the navbar */
+    position: relative; 
+    height: 80px;
+    padding-left: 160px; /* Space from the left edge */
+    padding-right: 160px; 
 }
 
 .navbar-logo {
-    height: 3.5em;
+    height: 4em;
 }
 
 .navbar-menu {
-    list-style: none;
     display: flex;
     gap: 1em;
 }
@@ -34,12 +36,12 @@
     width: 2em;
     border-radius: 50%;
     object-fit: cover;
-    margin-left: 0.75em;
+    margin-left: 1em;
+    cursor: pointer;
 }
 
 .navbar-dropdown {
     position: absolute;
-    right: 0;
     top: 100%; /* Align the dropdown to the bottom of the navbar menu item */
     background-color: #f8f8f8;
     list-style: none;
@@ -48,13 +50,10 @@
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     min-width: 160px;
     z-index: 1;
+    cursor: pointer;
 }
 
 .navbar-dropdown li {
     padding: 8px 16px;
     white-space: nowrap;
-}
-
-.navbar-dropdown li:hover {
-    background-color: #ddd;
 }
