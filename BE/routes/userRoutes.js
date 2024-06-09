@@ -10,5 +10,6 @@ router.get("/roles", userController.userRoles);
 router.post("/signup", upload.single("photo"), userController.userSignup);
 router.post("/login", userController.userLogin);
 router.get("/:user_id", userController.getUserById);
+router.delete("/:user_id", userController.deleteUser);
 
 export default router;

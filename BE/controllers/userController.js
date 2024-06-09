@@ -83,9 +83,38 @@ const getUserById = async (req, res) => {
     }
 };
 
+const deleteUser = async (req, res) => {
+    const { user_id } = req.params;
+
+    try {
+        await db.query('BEGIN');
+
+        await db.query('DELETE FROM resume WHERE user_id = $1', [user_id]);
+
+        await db.query('DELETE FROM company WHERE user_id = $1', [user_id]);
+
+        await db.query('DELETE FROM applications WHERE user_id = $1', [user_id]);
+
+        await db.query('DELETE FROM jobs WHERE user_id = $1', [user_id]);
+
+        await db.query('DELETE FROM users WHERE id = $1', [user_id]);
+
+        await db.query('COMMIT');
+
+        // Kirim respon JSON jika berhasil
+        res.status(200).json({ message: 'User deleted successfully' });
+    } catch (error) {
+        await db.query('ROLLBACK');
+        
+        console.error('Error deleting user:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+};
+
 export default {
     userRoles,
     userSignup,
     userLogin,
-    getUserById
+    getUserById,
+    deleteUser
 }
