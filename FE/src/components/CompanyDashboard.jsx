@@ -5,7 +5,7 @@ import { UserContext } from '../UserContexts';
 import SearchBar from '../components/SearchBar';
 import JobFilters from '../components/Job/JobFilters';
 import Modal from '../components/Modal';
-import '../styles/CompanyDashboard.css';
+import '../styles/Dashboard.css';
 
 const CompanyDashboard = () => {
   const { user } = useContext(UserContext);
@@ -72,6 +72,16 @@ const CompanyDashboard = () => {
     setShowFilters(!showFilters);
   };
 
+  const handleDelete = async (id) => {
+    try {
+      await axios.delete(`http://localhost:4000/jobs/${id}`);
+      setJobs(jobs.filter(job => job.id !== id));
+      setFilteredJobs(filteredJobs.filter(job => job.id !== id));
+    } catch (error) {
+      console.error('Error deleting job:', error);
+    }
+  };
+
   return (
     <div>
       <SearchBar onSearch={handleSearch} onToggleFilters={toggleFilters} />
@@ -81,16 +91,13 @@ const CompanyDashboard = () => {
       <div className="job-lists">
         {filteredJobs.length > 0 ? (
           filteredJobs.map(job => (
-            <div key={job.id}>
-              <Link to={`/applicants/${job.id}/${job.title}`}>
+            <div key={job.id} className="job-item">
                 <div className="job-list">
                   <img className="company-logo-icon" alt="" src="/company-logo@2x.png" />
                   <div className="job-title">
+                  <Link to={`/applicants/${job.id}/${job.title}`}>
                     <div className="social-media-assistant">{job.title}</div>
                     <div className="company-name-location-job">
-                      <div className="nomad">{job.company_name}</div>
-                      <div className="company-name-location-job-child" />
-                      <div className="nomad">{job.position}</div>
                     </div>
                     <div className="label3">
                       <div className="label4">
@@ -102,9 +109,10 @@ const CompanyDashboard = () => {
                         <div className="caption">{job.field}</div>
                       </div>
                     </div>
+                    </Link>
                   </div>
+                  <button onClick={() => handleDelete(job.id)}><img className="icon-trash" alt="" src="images/trash.png" /></button>
                 </div>
-              </Link>
             </div>
           ))
         ) : (

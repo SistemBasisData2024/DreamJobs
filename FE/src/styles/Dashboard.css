@@ -202,6 +202,7 @@ body {
   line-height: 160%;
   font-weight: 600;
 }
+
 .label4 {
   border-radius: var(--br-61xl);
   background-color: var(--color-mediumaquamarine-100);
@@ -297,8 +298,24 @@ body {
   gap: var(--gap-5xl);
 }
 
+
 .company-logo-icon1 {
   width: 64px;
   position: relative;
   height: 64px;
+}
+
+.icon-trash{
+  position: absolute;
+  top: 16.11%;
+}
+
+.icon-trash {
+  height: 16.11%;
+  right: 7.13%;
+  bottom: 67.79%;
+  left: 88.48%;
+  max-width: 100%;
+  overflow: hidden;
+  max-height: 100%;
 }
