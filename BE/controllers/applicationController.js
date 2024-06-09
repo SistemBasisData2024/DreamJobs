@@ -45,7 +45,8 @@ const getAllApplication = async (req, res) => {
 
     try {
         const query = `
-            SELECT  
+            SELECT 
+                jobs.id AS job_id,
                 jobs.title AS job_title, 
                 users.name AS company_name, 
                 applications.status

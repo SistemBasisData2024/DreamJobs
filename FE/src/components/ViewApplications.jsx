@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { UserContext } from '../UserContexts';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 import '../styles/ViewApplications.css';
 
 const ViewApplications = () => {
@@ -10,17 +11,16 @@ const ViewApplications = () => {
     useEffect(() => {
         const fetchApplications = async () => {
             try {
-                const storedApplications = JSON.parse(localStorage.getItem('applications')) || [];
-                const userApplications = storedApplications.filter(app => app.user_id === user.id);
-                setApplications(userApplications);
+                if (user && user.id) {
+                    const res = await axios.get(`http://localhost:4000/application/${user.id}`);
+                    setApplications(res.data);
+                }
             } catch (err) {
                 console.error('Error fetching applications:', err);
             }
         };
 
-        if (user && user.id) {
-            fetchApplications();
-        }
+        fetchApplications();
     }, [user]);
 
     if (!applications.length) return <div>No applications found.</div>;

@@ -9,13 +9,15 @@ const JobDetail = () => {
     const { user } = useContext(UserContext);
     const [applyError, setApplyError] = useState(null);
     const [hasApplied, setHasApplied] = useState(false);
-    const [hasResume, setHasResume] = useState(false); 
+    const [hasResume, setHasResume] = useState(false);
 
     useEffect(() => {
         const fetchJob = async () => {
             try {
-                const res = await axios.get(`http://localhost:4000/jobs/${job_id}`);
-                setJob(res.data);
+                if (job_id) { // Add a check for job_id
+                    const res = await axios.get(`http://localhost:4000/jobs/${job_id}`);
+                    setJob(res.data);
+                }
             } catch (err) {
                 console.error('Error fetching job details:', err);
             }
@@ -23,7 +25,7 @@ const JobDetail = () => {
 
         const checkApplicationStatus = async () => {
             try {
-                if (user && user.id) {
+                if (user && user.id && job_id) { // Add checks for user, user.id, and job_id
                     const res = await axios.get(`http://localhost:4000/application/checkApplication/${job_id}/${user.id}`);
                     setHasApplied(res.data.applied);
                 }
@@ -34,8 +36,10 @@ const JobDetail = () => {
 
         const checkResumeExists = async () => {
             try {
-                const res = await axios.get(`http://localhost:4000/resume/checkResume/${user.id}`);
-                setHasResume(res.data.hasResume);
+                if (user && user.id) { // Add a check for user and user.id
+                    const res = await axios.get(`http://localhost:4000/resume/checkResume/${user.id}`);
+                    setHasResume(res.data.hasResume);
+                }
             } catch (err) {
                 console.error('Error checking resume existence:', err);
             }
@@ -56,20 +60,6 @@ const JobDetail = () => {
                 user_id: user.id,
                 status: 'Screening'
             });
-
-            // Simpan aplikasi ke localStorage atau context
-            const newApplication = {
-                job_id,
-                user_id: user.id,
-                status: 'Screening',
-                job_title: job.title,
-                company_name: job.company_name
-            };
-            const existingApplications = JSON.parse(localStorage.getItem('applications')) || [];
-            localStorage.setItem('applications', JSON.stringify([...existingApplications, newApplication]));
-
-            setApplySuccess(true);
-
             setHasApplied(true);
             alert('Application submitted successfully!');
         } catch (err) {
@@ -116,9 +106,8 @@ const JobDetail = () => {
             )}
             {!hasApplied && !hasResume && ( // Show message if user does not have a resume
                 <p style={{ color: 'red', textAlign: 'center' }}>You need to create a resume before applying.</p>
-            )} 
-            {hasApplied && <p style={ // Show message if user successfully applies for a job
-                { color: 'blue', textAlign: 'center' }}>You have already applied for this job.</p>}
+            )}
+            {hasApplied && <p style={{ color: 'blue', textAlign: 'center' }}>You have already applied for this job.</p>} 
         </div>
     );
 };
