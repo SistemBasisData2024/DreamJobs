@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import '../styles/Style.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+import '../styles/Signup.css';
 
 const Signup = () => {
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
+    const [error, setError] = useState(null);
     const [role, setRole] = useState('');
     const [photo, setPhoto] = useState(null);
     const [roleOptions, setRoleOptions] = useState([]);
@@ -54,54 +55,96 @@ const Signup = () => {
             navigate('/');
         } catch (err) {
             console.error('Error signing up:', err);
+            setError(err.response.data.message || 'An error occurred while signing up.');
         }
     };
 
     return (
-        <form onSubmit={handleSubmit} className="form-container signup-form">
-            <input
-                type="text"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-                placeholder="Username"
-                required
-            />
-            <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="Email"
-                required
-            />
-            <div className="password-container">
-                <input
-                    type={showPassword ? "text" : "password"}
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    placeholder="Password"
-                    required
-                />
-                <span onClick={() => setShowPassword(!showPassword)} className="eye-icon">
-                    <FontAwesomeIcon icon={showPassword ? faEyeSlash : faEye} />
-                </span>
+        <div className="login">
+            <img className="side-right-icon" alt="" src="images/bg signup.png" />
+            <div className="dreamjobs-all-rights">
+                © 2024 DreamJobs. All Rights Reserved
             </div>
-            <select
-                value={role}
-                onChange={(e) => setRole(e.target.value)}
-                required
-            >
-                <option value="" disabled>Select Role</option>
-                {roleOptions.map((roleOption, index) => (
-                    <option key={index} value={roleOption}>{roleOption}</option>
-                ))}
-            </select>
-            <input
-                type="file"
-                onChange={handleFileChange}
-                accept="image/*"
-            />
-            <button type="submit">Sign Up</button>
-        </form>
+            <img className="component-3-1-1" alt="" src="images/Logo.png" />
+            <div className="sign-in-parent">
+                <div className="sign-in">
+                    <div className="log-in-parent">
+                        <div className="log-in">Create your account</div>
+                        <form onSubmit={handleSubmit}>
+                            <div className="email-parent">
+                                <div className="email">
+                                    <div className="label-parent">
+                                        <div className="label">Username </div>
+                                    </div>
+                                    <input
+                                        className="text-field"
+                                        type="text"
+                                        value={username}
+                                        onChange={(e) => setUsername(e.target.value)}
+                                        required
+                                    />
+                                </div>
+                                <div className="email">
+                                    <div className="label-parent">
+                                        <div className="label">Email </div>
+                                    </div>
+                                    <input
+                                        className="text-field"
+                                        type="email"
+                                        value={email}
+                                        onChange={(e) => setEmail(e.target.value)}
+                                        required
+                                    />
+                                </div>
+                                <div className="email">
+                                    <div className="label-parent">
+                                        <div className="label">Password</div>
+                                    </div>
+                                    <div className="text-field">
+                                        <input
+                                            className="text-field-pass"
+                                            type={showPassword ? "text" : "password"}
+                                            value={password}
+                                            onChange={(e) => setPassword(e.target.value)}
+                                            required
+                                        />
+                                        <span onClick={() => setShowPassword(!showPassword)} className="eye-icon">
+                                            <FontAwesomeIcon icon={showPassword ? faEyeSlash : faEye} />
+                                        </span>
+                                    </div>
+                                    {error && <div className="error-message">{error}</div>}
+                                </div>
+                                <select
+                                    value={role}
+                                    onChange={(e) => setRole(e.target.value)}
+                                    required
+                                >
+                                    <option value="" disabled>Select Role</option>
+                                    {roleOptions.map((roleOption, index) => (
+                                        <option key={index} value={roleOption}>{roleOption}</option>
+                                    ))}
+                                </select>
+                                <input
+                                    type="file"
+                                    onChange={handleFileChange}
+                                    accept="image/*"
+                                />
+
+                                <div className="button-parent">
+                                    <button className="button" type="submit">Sign Up</button>
+                                    <div className="link-text">
+                                        <div className="by-creating-an-container">
+                                            <span>{`By continuing, you agree to the `}</span>
+                                            <span className="terms-of-use">Terms of use</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
     );
 };
 

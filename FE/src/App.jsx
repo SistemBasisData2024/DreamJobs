@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
@@ -18,11 +18,23 @@ import CompanyDetail from './components/CompanyDetail';
 import ViewApplications from './components/ViewApplications'; 
 import ApplicantList from './components/ApplicantList';
 
+
 const App = () => {
   return (
     <UserProvider>
       <Router>
-        <Navbar />
+        <Main />
+      </Router>
+    </UserProvider>
+  );
+};
+
+const Main = () => {
+  const location = useLocation();
+  const hideNavbarPaths = ['/login', '/signup'];
+  return (
+    <>
+      {!hideNavbarPaths.includes(location.pathname) && <Navbar />}
         <Routes>
           <Route path="/" element={<Navigate to="/home" replace />} />
           <Route path="/profile" element={<Profile />} />
@@ -41,8 +53,7 @@ const App = () => {
           <Route path="/view-applications" element={<ViewApplications />} /> {/* Add ViewApplications route */}
           <Route path="/applicants/:job_id/:title" element={<ApplicantList/>} />
         </Routes>
-      </Router>
-    </UserProvider>
+    </>
   );
 };
 

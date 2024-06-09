@@ -1,18 +1,37 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import '../../styles/Dashboard.css';
 
 const JobList = ({ jobs }) => (
-  <div className="job-list">
+  <div className="job-lists">
     {jobs.length > 0 ? (
       jobs.map(job => (
-        <div key={job.id} className="job-item">
-          <h2><strong>{job.title}</strong></h2>
-          <p>{job.description}</p>
-          <p><strong>Type:</strong> {job.job_type}</p>
-          <p><strong>Field:</strong> {job.field}</p>
-          <p><strong>Location:</strong> {job.location}</p>
-          <p style={{ color:'black'}}><Link to={`/jobDetail/${job.id}`}>Show Details</Link></p>
+        <div key={job.id}>
+           <Link to={`/jobDetail/${job.id}`}>
+          <div className="job-list">
+        <img className="company-logo-icon" alt="" src="/company-logo@2x.png" />
+        <div className="job-title">
+          <div className="social-media-assistant">{job.title}</div>
+          <div className="company-name-location-job">
+            <div className="nomad">{job.company_name}</div>
+            <div className="company-name-location-job-child" />
+            <div className="nomad">{job.location}</div>
+          </div>
+          <div className="label3">
+            <div className="label4">
+              <div className="caption">{job.job_type}</div>
+            </div>
+            <div className="label-child" />
+            <div className="label5">
+              <div className="label-item" />
+              <div className="caption">{job.field}</div>
+            </div>
+          </div>
         </div>
+      </div>
+      </Link>
+        </div>
+       
       ))
     ) : (
       <p>No jobs available</p>
