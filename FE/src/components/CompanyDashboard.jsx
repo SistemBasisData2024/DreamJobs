@@ -12,11 +12,12 @@ const CompanyDashboard = () => {
   const [jobs, setJobs] = useState([]);
   const [filteredJobs, setFilteredJobs] = useState([]);
   const [showFilters, setShowFilters] = useState(false);
+  const [userPhotos, setUserPhotos] = useState({});
 
   useEffect(() => {
-    const fetchJobs = async (user_id) => {
+    const fetchJobs = async () => {
       try {
-        const response = await axios.get(`http://localhost:4000/jobs/getAllPosts/${user_id}`);
+        const response = await axios.get(`http://localhost:4000/jobs/getAllPosts/${user.id}`);
         if (response.data.length === 0) {
           console.log("No job vacancies posted");
           setJobs([]);
@@ -30,10 +31,27 @@ const CompanyDashboard = () => {
       }
     };
 
+    const fetchUserPhotos = async () => {
+      const photos = {};
+      await Promise.all(
+        jobs.map(async (job) => {
+          try {
+            const userResponse = await axios.get(`http://localhost:4000/user/${job.user_id}`);
+            photos[job.user_id] = userResponse.data.photo;
+          } catch (err) {
+            console.error(`Error fetching user photo for user_id: ${job.user_id}`, err);
+          }
+        })
+      );
+      setUserPhotos(photos);
+    };
+
     if (user && user.id) {
       fetchJobs(user.id);
     }
-  }, [user]);
+
+    fetchUserPhotos();
+  }, [user, jobs]);
 
   const handleSearch = (term) => {
     if (term === '') {
@@ -52,7 +70,7 @@ const CompanyDashboard = () => {
   };
 
   const handleFilter = (type, value) => {
-    let url = 'http://localhost:4000/jobs';
+    let url = `http://localhost:4000/jobs`;
 
     if (type && value) {
       url += `/${type}/${value}`;
@@ -74,17 +92,17 @@ const CompanyDashboard = () => {
 
   return (
     <div>
-      <SearchBar onSearch={handleSearch} onToggleFilters={toggleFilters} />
       <Modal isOpen={showFilters} onClose={toggleFilters}>
         <JobFilters onFilter={handleFilter} />
       </Modal>
+      <SearchBar onSearch={handleSearch} onToggleFilters={toggleFilters} />
       <div className="job-lists">
         {filteredJobs.length > 0 ? (
           filteredJobs.map(job => (
             <div key={job.id}>
               <Link to={`/applicants/${job.id}/${job.title}`}>
                 <div className="job-list">
-                  <img className="company-logo-icon" alt="" src="/company-logo@2x.png" />
+                  <img className="company-logo-icon" alt="" src={`http://localhost:4000${userPhotos[job.user_id]}`} />
                   <div className="job-title">
                     <div className="social-media-assistant">{job.title}</div>
                     <div className="company-name-location-job">
