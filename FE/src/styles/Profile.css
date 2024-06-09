@@ -10,14 +10,15 @@
     border-radius: 8px; 
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
     max-width: 600px; 
-    margin: 2rem auto; 
+    margin: auto;
+    margin-top: 15px;
 }
 
 .profile-title {
     font-size: 2rem;
     font-weight: bold;
     color: #333; 
-    margin-bottom: 1rem;
+    margin-bottom: 23px;
 }
 
 .profile-info {
@@ -35,9 +36,55 @@ p {
 }
 
 .profile-photo {
-    width: 150px; /* Atur lebar foto profil sesuai kebutuhan */
-    height: auto; /* Biarkan ketinggian sesuai proporsi */
-    margin-right: 20px; /* Jarak antara foto dan informasi profil */
+    width: 150px;
+    height: auto; 
+   
     border-radius: 50%;
-    
+}
+
+.delete-button {
+    padding: 10px 20px;
+    background-color: rgb(1, 1, 59);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 15px;
+}
+
+.confirm-popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.confirm-popup-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.confirm-button, .cancel-button {
+    padding: 10px 20px;
+    margin: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.confirm-button {
+    background-color: red;
+    color: white;
+}
+
+.cancel-button {
+    background-color: gray;
+    color: white;
 }
