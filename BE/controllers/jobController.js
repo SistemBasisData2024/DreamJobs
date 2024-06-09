@@ -144,7 +144,7 @@ const getAllPosts = async (req, res) => {
 
     try {
         const query = 
-        `SELECT jobs.id, jobs.title, jobs.position, jobs.field, jobs.job_type
+        `SELECT jobs.id, jobs.user_id, jobs.title, jobs.position, jobs.field, jobs.job_type
         FROM jobs WHERE user_id = $1`;
 
         const { rows } = await db.query(query, [user_id]);
