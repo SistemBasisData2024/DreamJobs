@@ -130,7 +130,7 @@ CREATE TYPE application_status AS ENUM ('Screening', 'Interview', 'Offer', 'Reje
 ```sql
 CREATE TABLE applications (
     id SERIAL PRIMARY KEY,
-    job_id INTEGER REFERENCES jobs(id),
+    job_id INTEGER REFERENCES jobs(id) ON DELETE CASCADE,
     user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
     status application_status,
     posting_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
