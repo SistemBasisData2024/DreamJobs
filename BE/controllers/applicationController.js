@@ -52,7 +52,7 @@ const getAllApplication = async (req, res) => {
             FROM 
                 applications
                 JOIN jobs ON applications.job_id = jobs.id
-                JOIN users ON jobs.company_id = users.id
+                JOIN users ON jobs.user_id = users.id
             WHERE 
                 applications.user_id = $1
             ORDER BY 
