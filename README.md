@@ -86,3 +86,11 @@ CREATE TABLE applications (
 # UML Diagram
 ![Dreajobs_UML](https://github.com/SistemBasisData2024/DreamJobs/blob/038efdc5001aa1d10ffcc0518fb031a607b964a3/Dreamjobs_UML.png)
 
+# Progress Report
+### Pertemuan Pertama  : (31 May 2024)
+![Screenshot 2024-05-31 202045](https://github.com/SistemBasisData2024/DreamJobs/assets/120215928/114336ba-fadb-4f96-aa80-28682324f6b8)
+
+### Pertemuan Kedua    : (08 June 2024)
+![Screenshot 2024-06-08 211407](https://github.com/SistemBasisData2024/DreamJobs/assets/120215928/472dca89-4768-4bf7-b581-9af9601eea7c)
+
+
