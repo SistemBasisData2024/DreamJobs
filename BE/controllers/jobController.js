@@ -99,7 +99,7 @@ const getJob = async (req, res) => {
 const getAllJobs = async (req, res) => {
     try {
         const query = 
-        `SELECT jobs.id, jobs.title, users.name AS company_name, jobs.position, jobs.field, jobs.location, jobs.job_type
+        `SELECT jobs.id, jobs.user_id, jobs.title, users.name AS company_name, jobs.position, jobs.field, jobs.location, jobs.job_type
         FROM jobs JOIN users ON jobs.user_id = users.id`;
 
         const { rows } = await db.query(query);
@@ -143,7 +143,7 @@ const searchJobs = async (req, res) => {
 
     try {
         const query = 
-        `SELECT jobs.title, users.name AS company_name, jobs.position, jobs.location, jobs.field, jobs.job_type
+        `SELECT jobs.id, jobs.user_id, jobs.title, users.name AS company_name, jobs.position, jobs.location, jobs.field, jobs.job_type
         FROM jobs JOIN users ON jobs.user_id = users.id
         WHERE title ILIKE $1
         OR description ILIKE $1`;
@@ -167,7 +167,7 @@ const getJobsByType = async (req, res) => {
 
     try {
         const query = 
-            `SELECT jobs.title, users.name AS company_name, jobs.position, jobs.field, jobs.location, jobs.job_type
+            `SELECT jobs.id, jobs.user_id, jobs.title, users.name AS company_name, jobs.position, jobs.field, jobs.location, jobs.job_type
              FROM jobs JOIN users ON jobs.user_id = users.id
              WHERE jobs.job_type = $1`;
 
@@ -190,7 +190,7 @@ const getJobsByField = async (req, res) => {
 
     try {
         const query = 
-            `SELECT jobs.title, users.name AS company_name, jobs.position, jobs.field, jobs.location, jobs.job_type
+            `SELECT jobs.id, jobs.user_id, jobs.title, users.name AS company_name, jobs.position, jobs.field, jobs.location, jobs.job_type
              FROM jobs JOIN users ON jobs.user_id = users.id
              WHERE jobs.field = $1`;
 
@@ -213,7 +213,7 @@ const getJobsByLocation = async (req, res) => {
 
     try {
         const query = 
-            `SELECT jobs.title, users.name AS company_name, jobs.position, jobs.field, jobs.location, jobs.job_type
+            `SELECT jobs.id, jobs.user_id, jobs.title, users.name AS company_name, jobs.position, jobs.field, jobs.location, jobs.job_type
              FROM jobs JOIN users ON jobs.user_id = users.id
              WHERE jobs.location = $1`;
 
@@ -229,7 +229,6 @@ const getJobsByLocation = async (req, res) => {
         res.status(500).json({ error: 'Internal Server Error' });
     }
 }
-
 
 export default {
     jobType,
