@@ -95,6 +95,29 @@ const getJob = async (req, res) => {
     }
 }
 
+// Untuk menghapus postingan job -> di beranda Company
+const deleteJob = async (req, res) => {
+    const { id } = req.params;
+
+    try {
+        const applicants = await db.query(
+            `DELETE FROM applications WHERE job_id=$1 RETURNING *`,
+            [id]
+        );
+
+        const result = await db.query(
+            `DELETE FROM jobs WHERE id=$1 RETURNING *`,
+            [id]
+        );
+
+        res.status(204).json({ message: 'Job successfully deleted' });
+    } catch (error) {
+        console.error('Error: ', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+};
+
+
 // Di beranda secara otomatis akan menampilkan semua baris dari tabel jobs -> di sisi job seeker
 const getAllJobs = async (req, res) => {
     try {
@@ -236,6 +259,7 @@ export default {
     location,
     addJob,
     getJob,
+    deleteJob,
     getAllJobs,
     getAllPosts,
     searchJobs,

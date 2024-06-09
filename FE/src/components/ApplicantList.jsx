@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams, Link } from 'react-router-dom';
+import '../styles/ApplicantList.css';
 
 const ApplicantList = () => {
     const { job_id, title } = useParams();
@@ -39,22 +40,22 @@ const ApplicantList = () => {
     };
 
     return (
-        <div style={{ padding: '20px', maxWidth: '600px', margin: '0 auto', border: '1px solid #ccc', borderRadius: '10px', marginTop: '20px' }}>
-            <h1 style={{ textAlign: 'center', fontWeight: 'bold', fontSize: '20px' }}>Applicants for {title}</h1>
+        <div className="applicant-list-container">
+            <h1 className="applicant-list-title">Applicants for {title}</h1>
             {applicants.length > 0 ? (
                 <ul>
                     {applicants.map((applicant, index) => (
-                        <li key={index} style={{ marginBottom: '10px' }}>
+                        <li key={index} className="applicant-item">
                             <p><strong>Name:</strong> {applicant.applicant_name}</p>
-                            <p>
-                                <strong>Status:</strong> {applicant.status}
+                            <div className="applicant-status">
+                                <p><strong>Status:</strong> {applicant.status}</p>
                                 {(applicant.status === 'Screening' || applicant.status === 'Interview') && (
-                                    <>
-                                        <Link to="#" style={{ marginLeft: '10px', textDecoration: 'underline', color: 'blue' }} onClick={() => setUpdateStatusId(applicant.id)}>
+                                    <div className="applicant-status-select">
+                                        <Link to="#" className="applicant-status-link" onClick={() => setUpdateStatusId(applicant.id)}>
                                             Update Status
                                         </Link>
                                         {updateStatusId === applicant.id && (
-                                            <div>
+                                            <div className="applicant-status-dropdown">
                                                 <select value={newStatus} onChange={(e) => setNewStatus(e.target.value)}>
                                                     <option value="">Select status</option>
                                                     {applicant.status === 'Screening' && (
@@ -71,14 +72,14 @@ const ApplicantList = () => {
                                                         </>
                                                     )}
                                                 </select>
-                                                <button onClick={() => handleUpdateStatus(applicant.id)}>Submit</button>
+                                                <button className="applicant-status-button" onClick={() => handleUpdateStatus(applicant.id)}>Submit</button>
                                             </div>
                                         )}
-                                    </>
+                                    </div>
                                 )}
-                            </p>
+                            </div>
                             <p>
-                                <Link to={`/viewResume/${applicant.user_id}`} style={{ textDecoration: 'underline', color: 'blue' }}>
+                                <Link to={`/viewResume/${applicant.user_id}`} className="applicant-status-link">
                                     Show resume
                                 </Link>
                             </p>

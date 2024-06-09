@@ -9,9 +9,10 @@ router.get("/jobType", jobController.jobType);
 router.get("/field", jobController.field);
 router.get("/location", jobController.location);
 
-// Posting pekerjaan dan mendapatkan detail pekerjaan
+// Posting pekerjaan, mendapatkan detail pekerjaan, dan menghapus postingan pekerjaan
 router.post("/:user_id", jobController.addJob);
 router.get("/:id", jobController.getJob);
+router.delete("/:id", jobController.deleteJob);
 
 // Untuk fitur searching
 router.get("/search/:term", jobController.searchJobs);

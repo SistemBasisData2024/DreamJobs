@@ -1,0 +1,69 @@
+.applicant-list-container {
+    padding: 20px;
+    max-width: 600px;
+    margin: 0 auto;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+.applicant-list-title {
+    text-align: center;
+    font-weight: bold;
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+.applicant-item {
+    margin-bottom: 10px;
+}
+
+.applicant-status {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.applicant-status-select {
+    position: relative;
+}
+
+.applicant-status-link {
+    margin-left: 10px;
+    text-decoration: underline;
+    color: blue;
+    cursor: pointer;
+}
+
+.applicant-status-dropdown {
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 0;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.applicant-status-dropdown select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.applicant-status-button {
+    background-color: blue;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.applicant-status-button:hover {
+    background-color: darkblue;
+}
