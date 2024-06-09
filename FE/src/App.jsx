@@ -17,6 +17,7 @@ import JobDetail from './components/Job/JobDetail';
 import CompanyDetail from './components/CompanyDetail';
 import ViewApplications from './components/ViewApplications'; 
 import ApplicantList from './components/ApplicantList';
+import ViewResume from './components/ViewResume';
 
 const App = () => {
   return (
@@ -40,6 +41,7 @@ const App = () => {
           <Route path="/companyDetail/:company_id" element={<CompanyDetail/>} />
           <Route path="/view-applications" element={<ViewApplications />} /> {/* Add ViewApplications route */}
           <Route path="/applicants/:job_id/:title" element={<ApplicantList/>} />
+          <Route path="/viewResume/:user_id" element={<ViewResume/>} />
         </Routes>
       </Router>
     </UserProvider>
